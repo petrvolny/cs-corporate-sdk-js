@@ -25,3 +25,21 @@ export interface AccountNumber {
    */
   bic?: string;
 }
+
+export interface Amount {
+
+  /**
+   * Current ledger balance
+   */
+  value: number;
+
+  /**
+   * Value precision, currently always 2 (constant)
+   */
+  precision: number;
+
+  /**
+   * Currency of the bank account
+   */
+  currency: string;
+}

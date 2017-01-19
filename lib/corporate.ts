@@ -18,7 +18,7 @@ export function getClient() {
 }
 
 /**
- * Netbanking client 
+ * Corporate client 
  */
 export class CorporateClient extends CSCoreSDK.WebApiClient {
     
