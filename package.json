@@ -51,8 +51,11 @@
   },
   "dependencies": {
     "@types/lodash": "^4.14.45",
+    "@types/es6-promise": "0.0.32",
+    "@types/jasmine": "^2.5.41",
+    "@types/node": "^7.0.0",
     "axios": "^0.8.1",
-    "cs-core-sdk": "https://github.com/Ceskasporitelna/cs-core-sdk-js.git#v0.7.5",
+    "cs-core-sdk": "https://github.com/Ceskasporitelna/cs-core-sdk-js.git#v0.7.6",
     "lodash": "^4.17.4",
     "node-uuid": "^1.4.3",
     "source-map-support": "^0.3.3",
