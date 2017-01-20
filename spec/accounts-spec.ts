@@ -1,6 +1,6 @@
-/// <reference path="../build/cs-corporate-sdk.sfx.d.ts"/>
 /// <reference types="jasmine" />
 /// <reference types="node" />
+ 
 
 import * as CSCoreSDK from 'cs-core-sdk';
 var corporate = require('../build/cs-corporate-sdk.node.js');
@@ -40,6 +40,7 @@ describe("Corporate SDK", function () {
       });
     }).then(response => {
       done();
+      
     }).catch(logJudgeError);
   });
 
@@ -47,6 +48,20 @@ describe("Corporate SDK", function () {
     judgeSession.setNextCase('corporate.accounts.balance').then(_ => {
       return client.accounts.withId('3520EE975815E478AFED5180CC32647934720EF5').balance.get();
     }).then(response => {
+      expect(response.minBalance).toBe(1000);
+
+      expect(response.balance.value).toBe(21828327);
+      expect(response.balance.precision).toBe(2);
+      expect(response.balance.currency).toBe('CZK');
+
+      expect(response.disposable.value).toBe(21728327);
+      expect(response.disposable.precision).toBe(2);
+      expect(response.disposable.currency).toBe('CZK');
+      
+      expect(response.overdraft.value).toBe(0);
+      expect(response.overdraft.precision).toBe(2);
+      expect(response.overdraft.currency).toBe('CZK');
+
       done();
     }).catch(logJudgeError);
   });
@@ -56,12 +71,11 @@ describe("Corporate SDK", function () {
       return client.accounts.withId('3520EE975815E478AFED5180CC32647934720EF5').transactions.list({
         pageNumber: 0,
         pageSize: 1,
-
-        // TODO
-        dateStart: '2016-06-01T00:00:00+02:00',
-        dateEnd: '2016-06-01T00:00:00+02:00',
+        dateStart: new Date(2016, 5, 1),
+        dateEnd: new Date(2016, 5, 1),
       });
     }).then(response => {
+      
       done();
     }).catch(logJudgeError);
   });
