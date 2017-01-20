@@ -6,12 +6,18 @@ import { TransactionsResource } from './transactions';
 export class AccountsResource extends CSCoreSDK.Resource
 implements CSCoreSDK.PaginatedListEnabled<Account> {
 
+  /**
+   * List bank accounts incl. basic account information the current user can see accordign to disposition model.
+   */
   list = (params?: AccountsParameters): Promise<AccountList> => {
     return CSCoreSDK.ResourceUtils.CallPaginatedListWithSuffix(this, null, 'accounts', params, response => {
       return response;
     });
   }
 
+  /**
+   * Returns Account resource with a given ID
+   */
   withId = (id: number|string): AccountResource => {
     return new AccountResource(id, this.getPath(), this.getClient());
   }
@@ -19,10 +25,16 @@ implements CSCoreSDK.PaginatedListEnabled<Account> {
 
 export class AccountResource extends CSCoreSDK.InstanceResource {
 
+  /**
+   * Returns resource for getting accounts balance
+   */
   get balance(): BalanceResource {
     return new BalanceResource(`${this.getPath()}/balance`, this.getClient());
   }
 
+  /**
+   * Returns resource for getting accounts transactions
+   */
   get transactions(): TransactionsResource {
     return new TransactionsResource(`${this.getPath()}/transactions`, this.getClient());
   }

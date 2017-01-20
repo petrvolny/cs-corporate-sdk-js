@@ -33,10 +33,16 @@ export class CorporateClient extends CSCoreSDK.WebApiClient {
         this.sharedContext = context;
     }
 
+    /**
+     * Get information about company accounts including balance and transactions
+     */
     get accounts(): AccountsResource {
         return new AccountsResource(`${this.getPath()}/accounts`, this);
     }
 
+    /**
+     * 
+     */
     get companies(): CompaniesResource {
         return new CompaniesResource(`${this.getPath()}/companies`, this);
     }

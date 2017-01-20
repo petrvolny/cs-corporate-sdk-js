@@ -4,6 +4,9 @@ import { AccountNumber, Amount } from '../common';
 export class TransactionsResource extends CSCoreSDK.Resource
 implements CSCoreSDK.PaginatedListEnabled<Transaction> {
 
+  /**
+   * List accounts transactions
+   */
   list = (params?: TransactionsParameters): Promise<TransactionList> => {
     
     return CSCoreSDK.ResourceUtils.CallPaginatedListWithSuffix(this, null, 'transactions', params, response => {
@@ -13,7 +16,6 @@ implements CSCoreSDK.PaginatedListEnabled<Transaction> {
 }
 
 export interface TransactionsParameters extends CSCoreSDK.Paginated, CSCoreSDK.Sortable {
-
 
   /**
    * transactions from 

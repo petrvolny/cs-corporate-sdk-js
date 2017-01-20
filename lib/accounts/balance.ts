@@ -4,6 +4,9 @@ import { Amount } from '../common';
 export class BalanceResource extends CSCoreSDK.Resource
 implements CSCoreSDK.GetEnabled<AccountBalance> {
 
+  /**
+   * Get balance of the account
+   */
   get = (): Promise<AccountBalance> => {
 
     return CSCoreSDK.ResourceUtils.CallGet(this, null);
