@@ -8,7 +8,13 @@ implements CSCoreSDK.GetEnabled<RelationshipManagerPhotoInfo> {
    */
   get = (): Promise<RelationshipManagerPhotoInfo> => {
     
-    return CSCoreSDK.ResourceUtils.CallGet(this, null);
+    return CSCoreSDK.ResourceUtils.CallGet(this, null).then(response => {
+
+      // transform ISO strings to date objects
+      CSCoreSDK.EntityUtils.addDatesFromISO('agreementDate', response);
+
+      return response;
+    });
   }
 }
 

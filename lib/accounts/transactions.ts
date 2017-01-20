@@ -7,9 +7,19 @@ implements CSCoreSDK.PaginatedListEnabled<Transaction> {
   /**
    * List accounts transactions
    */
-  list = (params?: TransactionsParameters): Promise<TransactionList> => {
+  list = (params: TransactionsParameters): Promise<TransactionList> => {
     
+    // transform date objects to ISO strings
+    CSCoreSDK.EntityUtils.transformDatesToISO(['dateStart', 'dateEnd'], params);
+
+    // transform "sort" and "order" parameters to comma separated list from array
+    CSCoreSDK.EntityUtils.transformArrayParamsToString(params, ['sort', 'order']);
+
     return CSCoreSDK.ResourceUtils.CallPaginatedListWithSuffix(this, null, 'transactions', params, response => {
+
+      // transform ISO strings to date objects
+      CSCoreSDK.EntityUtils.addDatesToItems(['validationDate', 'bookingDate', 'currRateEURDate'], response);
+
       return response;
     });
   }

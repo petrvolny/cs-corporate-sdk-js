@@ -8,7 +8,13 @@ implements CSCoreSDK.ListEnabled<Campaign> {
    */
   list = (): Promise<CampaignList> => {
 
-    return CSCoreSDK.ResourceUtils.CallListWithSuffix(this, null);
+    return CSCoreSDK.ResourceUtils.CallListWithSuffix(this, null).then(response => {
+
+      // transform ISO strings to date objects
+      CSCoreSDK.EntityUtils.addDatesToItems('endDate', response);
+
+      return response;
+    });
   }
 }
 

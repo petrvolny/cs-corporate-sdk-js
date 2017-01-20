@@ -9,7 +9,13 @@ implements CSCoreSDK.GetEnabled<AccountBalance> {
    */
   get = (): Promise<AccountBalance> => {
 
-    return CSCoreSDK.ResourceUtils.CallGet(this, null);
+    return CSCoreSDK.ResourceUtils.CallGet(this, null).then(response => {
+
+      // transform ISO strings to date objects
+      CSCoreSDK.EntityUtils.addDatesFromISO('overdraftDueDate', response);
+
+      return response;
+    });
   }
 }
 
