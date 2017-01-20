@@ -4,11 +4,18 @@ import { RelationshipManagerPhotoResource } from './photo/photo';
 export class RelationshipManagersResource extends CSCoreSDK.Resource
 implements CSCoreSDK.ListEnabled<RelationshipManager>, CSCoreSDK.HasInstanceResource<RelationshipManagerResource> {
 
+  /**
+   * List all relationship managers grouped by their positions. You will get an array of positions whilst each position may include one or more relationship managers. Typically there should be just one position flagged as primary as well as one contact in each position. 
+   * You can filter for all positions (ALL) or for primary only (PRIMARY).
+   */
   list = (params?: RelationshipManagerListParameters): Promise<RelationshipManagerList> => {
 
     return CSCoreSDK.ResourceUtils.CallListWithSuffix(this, null, null, params);
   }
 
+  /**
+   * Returns RelationshipManagerResource for a given ID
+   */
   withId = (id: string|number): RelationshipManagerResource => {
 
     return new RelationshipManagerResource(id, this.getPath(), this.getClient());
@@ -18,11 +25,17 @@ implements CSCoreSDK.ListEnabled<RelationshipManager>, CSCoreSDK.HasInstanceReso
 export class RelationshipManagerResource extends CSCoreSDK.InstanceResource
 implements CSCoreSDK.GetEnabled<EmployeeDetail> {
 
+  /**
+   * Get a reletionshipt manager detail
+   */
   get = (): Promise<EmployeeDetail> => {
     
     return CSCoreSDK.ResourceUtils.CallGet(this, null);
   }
 
+  /**
+   * Returns RelationshipManagerPhotoResource for getting relationship managers photo
+   */
   get photo(): RelationshipManagerPhotoResource {
 
     return new RelationshipManagerPhotoResource(`${this.getPath()}/photo`, this.getClient());

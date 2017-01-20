@@ -3,6 +3,9 @@ import * as CSCoreSDK from 'cs-core-sdk';
 export class CampaignsResource extends CSCoreSDK.Resource
 implements CSCoreSDK.ListEnabled<Campaign> {
 
+  /**
+   * List marketing campaigns
+   */
   list = (): Promise<CampaignList> => {
 
     return CSCoreSDK.ResourceUtils.CallListWithSuffix(this, null);

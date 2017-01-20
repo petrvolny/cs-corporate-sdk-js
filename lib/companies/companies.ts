@@ -5,11 +5,17 @@ import { RelationshipManagersResource } from './relationship-managers';
 export class CompaniesResource extends CSCoreSDK.Resource
 implements CSCoreSDK.HasInstanceResource<CompanyResource>, CSCoreSDK.ListEnabled<Company> {
 
+  /**
+   * List of companies associated with client including the type of relationship from the current client to the subject.
+   */
   list = (): Promise<CompanyList> => {
 
     return CSCoreSDK.ResourceUtils.CallListWithSuffix(this, null);
   }
   
+  /**
+   * Get a Company resource for company with a given ID representing registration number
+   */
   withId = (id: string|number): CompanyResource => {
     
     return new CompanyResource(id, this.getPath(), this.getClient());
@@ -19,16 +25,25 @@ implements CSCoreSDK.HasInstanceResource<CompanyResource>, CSCoreSDK.ListEnabled
 export class CompanyResource extends CSCoreSDK.InstanceResource
 implements CSCoreSDK.GetEnabled<Company> {
 
+  /**
+   * Get company detail
+   */
   get = (): Promise<Company> => {
 
     return CSCoreSDK.ResourceUtils.CallGet(this, null);
   }
 
+  /**
+   * Returns CampaignsResource for listing company's campaigns
+   */
   get campaigns(): CampaignsResource {
 
     return new CampaignsResource(`${this.getPath()}/campaigns`, this.getClient());
   }
 
+  /**
+   * Returns RelationshipManagersResource for listing company's relationship managers and info about them including photo
+   */
   get relationshipManagers(): RelationshipManagersResource {
 
     return new RelationshipManagersResource(`${this.getPath()}/relationshipmanagers`, this.getClient());

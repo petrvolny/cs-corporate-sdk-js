@@ -41,7 +41,7 @@ export class CorporateClient extends CSCoreSDK.WebApiClient {
     }
 
     /**
-     * 
+     * Get information about companies including theit campaings and relationship managers
      */
     get companies(): CompaniesResource {
         return new CompaniesResource(`${this.getPath()}/companies`, this);
