@@ -2,9 +2,9 @@ import * as CSCoreSDK from 'cs-core-sdk';
 import { RelationshipManagerPhotoResource } from './photo/photo';
 
 export class RelationshipManagersResource extends CSCoreSDK.Resource
-implements CSCoreSDK.ListEnabled<any>, CSCoreSDK.HasInstanceResource<RelationshipManagerResource> {
+implements CSCoreSDK.ListEnabled<RelationshipManager>, CSCoreSDK.HasInstanceResource<RelationshipManagerResource> {
 
-  list = (params?: any): Promise<any> => {
+  list = (params?: RelationshipManagerListParameters): Promise<RelationshipManagerList> => {
 
     return CSCoreSDK.ResourceUtils.CallListWithSuffix(this, null, null, params);
   }
@@ -16,9 +16,9 @@ implements CSCoreSDK.ListEnabled<any>, CSCoreSDK.HasInstanceResource<Relationshi
 }
 
 export class RelationshipManagerResource extends CSCoreSDK.InstanceResource
-implements CSCoreSDK.GetEnabled<any> {
+implements CSCoreSDK.GetEnabled<EmployeeDetail> {
 
-  get = (): Promise<any> => {
+  get = (): Promise<EmployeeDetail> => {
     
     return CSCoreSDK.ResourceUtils.CallGet(this, null);
   }
@@ -29,7 +29,15 @@ implements CSCoreSDK.GetEnabled<any> {
   }
 }
 
-export interface RelationshipManagerList extends CSCoreSDK.ListEnabled<RelationshipManager> {}
+export interface RelationshipManagerListParameters {
+
+  /**
+   * Filter for all positions (ALL) or for primary only (PRIMARY).
+   */
+  filter?: string;
+}
+
+export interface RelationshipManagerList extends CSCoreSDK.ListResponse<RelationshipManager> {}
 
 export interface RelationshipManager {
 
