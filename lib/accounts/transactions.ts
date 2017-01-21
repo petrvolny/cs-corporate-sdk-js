@@ -18,7 +18,7 @@ implements CSCoreSDK.PaginatedListEnabled<Transaction> {
     return CSCoreSDK.ResourceUtils.CallPaginatedListWithSuffix(this, null, 'transactions', params, response => {
 
       // transform ISO strings to date objects
-      CSCoreSDK.EntityUtils.addDatesToItems(['validationDate', 'bookingDate', 'currRateEURDate'], response);
+      CSCoreSDK.EntityUtils.addDatesToItems(['validationDate', 'valuationDate', 'bookingDate', 'currRateEURDate'], response);
 
       return response;
     });
