@@ -10,7 +10,15 @@ implements CSCoreSDK.ListEnabled<RelationshipManager>, CSCoreSDK.HasInstanceReso
    */
   list = (params?: RelationshipManagerListParameters): Promise<RelationshipManagerList> => {
 
-    return CSCoreSDK.ResourceUtils.CallListWithSuffix(this, null, null, params);
+    return CSCoreSDK.ResourceUtils.CallListWithSuffix(this, null, null, params).then(response => {
+
+      // Add convenience methods to listing items
+      response.items.forEach(item => {
+        resourcifyListing(<RelationshipManager>item, this.withId((<RelationshipManager>item).id));
+      });
+
+      return response;
+    });
   }
 
   /**
@@ -30,7 +38,13 @@ implements CSCoreSDK.GetEnabled<EmployeeDetail> {
    */
   get = (): Promise<EmployeeDetail> => {
     
-    return CSCoreSDK.ResourceUtils.CallGet(this, null);
+    return CSCoreSDK.ResourceUtils.CallGet(this, null).then(response => {
+
+      // Add convenience methods to response
+      resourcifyListing(<RelationshipManager>response, this);
+
+      return response;
+    });
   }
 
   /**
@@ -40,6 +54,11 @@ implements CSCoreSDK.GetEnabled<EmployeeDetail> {
 
     return new RelationshipManagerPhotoResource(`${this.getPath()}/photo`, this.getClient());
   }
+}
+
+const resourcifyListing = (relationshipManager: RelationshipManager, relationshipManagerReference: RelationshipManagerResource) => {
+  relationshipManager.get = relationshipManagerReference.get;
+  relationshipManager.photo = relationshipManagerReference.photo;
 }
 
 export interface RelationshipManagerListParameters {
@@ -73,6 +92,16 @@ export interface RelationshipManager {
    * List of branch specialists in this position
    */
   employees: [ListingEmployee];
+
+  /**
+  * Convenience getter for getting relationship managers's photo resource
+  */
+  photo: RelationshipManagerPhotoResource;
+
+  /**
+   * Convenience method for getting detail of the relationship manager from the list 
+   */
+  get: () => Promise<Employee>;
 }
 
 export interface Employee {
@@ -288,4 +317,14 @@ export interface EmployeeDetail extends Employee {
       };
     };
   };
+
+  /**
+  * Convenience getter for getting relationship manager's photo resource
+  */
+  photo: RelationshipManagerPhotoResource;
+
+  /**
+   * Convenience method for getting detail of the relationship manager right from the list 
+   */
+  get: () => Promise<RelationshipManager>;
 };

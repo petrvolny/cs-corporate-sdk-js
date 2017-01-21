@@ -11,6 +11,12 @@ implements CSCoreSDK.PaginatedListEnabled<Account> {
    */
   list = (params?: AccountsParameters): Promise<AccountList> => {
     return CSCoreSDK.ResourceUtils.CallPaginatedListWithSuffix(this, null, 'accounts', params, response => {
+
+      // Add convenience methods to listing items
+      response.items.forEach(item => {
+        resourcifyListing(<Account>item, this.withId((<Account>item).id));
+      });
+
       return response;
     });
   }
@@ -38,6 +44,11 @@ export class AccountResource extends CSCoreSDK.InstanceResource {
   get transactions(): TransactionsResource {
     return new TransactionsResource(`${this.getPath()}/transactions`, this.getClient());
   }
+}
+
+const resourcifyListing = (account: Account, accountReference: AccountResource) => {
+  account.transactions = accountReference.transactions;
+  account.balance = accountReference.balance;
 }
 
 export interface AccountsParameters extends CSCoreSDK.Sortable, CSCoreSDK.Paginated {}
@@ -70,6 +81,16 @@ export interface Account {
    * Account owner
    */
   accountOwber: AccountOwner;
+
+  /**
+  * Convenience getter for getting accounts's transactions resource
+  */
+  transactions: TransactionsResource;
+
+  /**
+  * Convenience getter for getting accounts's balance resource
+  */
+  balance: BalanceResource;
 }
 
 export interface AccountOwner {
