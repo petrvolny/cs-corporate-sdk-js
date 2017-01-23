@@ -14,7 +14,7 @@ implements CSCoreSDK.HasInstanceResource<CompanyResource>, CSCoreSDK.ListEnabled
 
       // Add convenience methods to listing items
       response.items.forEach(item => {
-        resourcifyListing(<Company>item, this.withId((<Company>item).regNum));
+        resourcifyListing(<Company>item, this.withId((<Company>item).regNum), true);
       });
 
       return response;
@@ -41,7 +41,7 @@ implements CSCoreSDK.GetEnabled<Company> {
     return CSCoreSDK.ResourceUtils.CallGet(this, null).then(response => {
 
       // Add convenience methods to response
-      resourcifyListing(<Company>response, this);
+      resourcifyListing(<Company>response, this, false);
 
       return response;
     });
@@ -64,8 +64,10 @@ implements CSCoreSDK.GetEnabled<Company> {
   }
 }
 
-const resourcifyListing = (company: Company, companyReference: CompanyResource) => {
-  company.get = companyReference.get;
+const resourcifyListing = (company: Company, companyReference: CompanyResource, isListing) => {
+  if(isListing) {
+    company.get = companyReference.get;
+  }
   company.campaigns = companyReference.campaigns;
   company.relationshipManagers = companyReference.relationshipManagers;
 }
