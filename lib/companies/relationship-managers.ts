@@ -14,7 +14,12 @@ implements CSCoreSDK.ListEnabled<RelationshipManager>, CSCoreSDK.HasInstanceReso
 
       // Add convenience methods to listing items
       response.items.forEach(item => {
-        resourcifyListing(<RelationshipManager>item, this.withId((<RelationshipManager>item).id));
+        if(Array.isArray((<RelationshipManager>item).employees)) {
+
+          (<RelationshipManager>item).employees.forEach(employee => {
+            resourcifyListing(<ListingEmployee>employee, this.withId((<ListingEmployee>employee).empId), true);
+          });
+        }
       });
 
       return response;
@@ -41,7 +46,7 @@ implements CSCoreSDK.GetEnabled<EmployeeDetail> {
     return CSCoreSDK.ResourceUtils.CallGet(this, null).then(response => {
 
       // Add convenience methods to response
-      resourcifyListing(<RelationshipManager>response, this);
+      resourcifyListing(<EmployeeDetail>response, this, false);
 
       return response;
     });
@@ -56,9 +61,11 @@ implements CSCoreSDK.GetEnabled<EmployeeDetail> {
   }
 }
 
-const resourcifyListing = (relationshipManager: RelationshipManager, relationshipManagerReference: RelationshipManagerResource) => {
-  relationshipManager.get = relationshipManagerReference.get;
-  relationshipManager.photo = relationshipManagerReference.photo;
+const resourcifyListing = (employee: ListingEmployee|EmployeeDetail, employeeReference: RelationshipManagerResource, isFromListing) => {
+  if(isFromListing) {
+    (<any>employee).get = employeeReference.get;
+  }
+  employee.photo = employeeReference.photo;
 }
 
 export interface RelationshipManagerListParameters {
@@ -92,16 +99,6 @@ export interface RelationshipManager {
    * List of branch specialists in this position
    */
   employees: [ListingEmployee];
-
-  /**
-  * Convenience getter for getting relationship managers's photo resource
-  */
-  photo: RelationshipManagerPhotoResource;
-
-  /**
-   * Convenience method for getting detail of the relationship manager from the list 
-   */
-  get: () => Promise<Employee>;
 }
 
 export interface Employee {
@@ -125,6 +122,16 @@ export interface Employee {
    * Specialist's last name.
    */
   lastName: string;
+
+  /**
+  * Convenience getter for getting relationship managers's photo resource
+  */
+  photo: RelationshipManagerPhotoResource;
+
+  /**
+   * Convenience method for getting detail of the relationship manager from the list 
+   */
+  get: () => Promise<Employee>;
 }
 
 export interface ListingEmployee extends Employee {
