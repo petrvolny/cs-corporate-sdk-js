@@ -131,7 +131,7 @@ export interface Employee {
   /**
    * Convenience method for getting detail of the relationship manager from the list 
    */
-  get: () => Promise<Employee>;
+  get: () => Promise<Employee|RelationshipManager>;
 }
 
 export interface ListingEmployee extends Employee {
