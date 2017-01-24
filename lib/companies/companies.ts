@@ -22,11 +22,11 @@ implements CSCoreSDK.HasInstanceResource<CompanyResource>, CSCoreSDK.ListEnabled
   }
   
   /**
-   * Get a Company resource for company with a given ID representing registration number
+   * Get a Company resource for company with a given ico representing registration number
    */
-  withId = (id: string|number): CompanyResource => {
+  withId = (ico: string|number): CompanyResource => {
     
-    return new CompanyResource(id, this.getPath(), this.getClient());
+    return new CompanyResource(ico, this.getPath(), this.getClient());
   }
 }
 

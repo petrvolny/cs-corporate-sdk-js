@@ -27,11 +27,11 @@ implements CSCoreSDK.ListEnabled<RelationshipManager>, CSCoreSDK.HasInstanceReso
   }
 
   /**
-   * Returns RelationshipManagerResource for a given ID
+   * Returns RelationshipManagerResource for a given employee id
    */
-  withId = (id: string|number): RelationshipManagerResource => {
+  withId = (emplId: string|number): RelationshipManagerResource => {
 
-    return new RelationshipManagerResource(id, this.getPath(), this.getClient());
+    return new RelationshipManagerResource(emplId, this.getPath(), this.getClient());
   }
 }
 

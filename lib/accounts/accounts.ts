@@ -24,8 +24,8 @@ implements CSCoreSDK.PaginatedListEnabled<Account> {
   /**
    * Returns Account resource with a given ID
    */
-  withId = (id: number|string): AccountResource => {
-    return new AccountResource(id, this.getPath(), this.getClient());
+  withId = (accountId: number|string): AccountResource => {
+    return new AccountResource(accountId, this.getPath(), this.getClient());
   }
 }
 
