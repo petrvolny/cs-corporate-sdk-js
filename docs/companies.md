@@ -22,7 +22,7 @@ You can list all companies by calling the `list` method on [CompaniesResource](.
   CSCorporateSDK
     .getClient()
     .companies
-    .list(parameters: CompaniesResource)
+    .list()
     .then(...)
     .catch(...)
 
