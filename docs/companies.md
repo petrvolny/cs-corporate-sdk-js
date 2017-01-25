@@ -47,7 +47,7 @@ Get company detail by getting the [CompanyResource](../lib/companies/companies.t
 
 ## 3. List campaigns for company
 
-You can list campaigns for company by getting the [CampaignsResource](../lib/companies/campaigns,ts#L3) and then calling the `list` method on it. For full response see [CampaignList](../lib/companies/campaigns.ts#L21) interface.
+You can list campaigns for company by getting the [CampaignsResource](../lib/companies/campaigns.ts#L3) and then calling the `list` method on it. For full response see [CampaignList](../lib/companies/campaigns.ts#L21) interface.
 
 ```javascript
 
@@ -101,7 +101,7 @@ Get relationship manager detail by getting the [RelationshipManagerResource](../
 
 ## 6. Get relationship manager photo information
 
-Get relationship manager photo information by getting the [RelationshipManagerPhotoInfoResource](../lib/companies/photo/info,ts#L3) and calling the `get` method on it. For full response see [RelationshipManagerPhotoInfo](../lib/companies/photo/info.ts#L21) interaface.
+Get relationship manager photo information by getting the [RelationshipManagerPhotoInfoResource](../lib/companies/photo/info.ts#L3) and calling the `get` method on it. For full response see [RelationshipManagerPhotoInfo](../lib/companies/photo/info.ts#L21) interaface.
 
 ```javascript
 
