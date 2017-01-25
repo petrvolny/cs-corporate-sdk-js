@@ -18,7 +18,7 @@ implements CSCoreSDK.PaginatedListEnabled<Transaction> {
     return CSCoreSDK.ResourceUtils.CallPaginatedListWithSuffix(this, null, 'transactions', params, response => {
 
       // transform ISO strings to date objects
-      CSCoreSDK.EntityUtils.addDatesToItems(['validationDate', 'valuationDate', 'bookingDate', 'currRateEURDate'], response);
+      CSCoreSDK.EntityUtils.addDatesToItems(['valuationDate', 'bookingDate', 'currRateEURDate'], response);
 
       return response;
     });
@@ -50,7 +50,7 @@ export interface Transaction {
   /**
    * transaction party info
    */
-  accountParty?: AccountParty;
+  accountParty?: AccountNumber;
 
   /**
    * Amount
@@ -120,23 +120,10 @@ export interface Transaction {
   /**
    * date of valuation
    */
-  validationDate?: Date;
+  valuationDate?: Date;
 
   /**
    * variable symbol
    */
   variableSymbol?: string;
-}
-
-export interface AccountParty extends AccountNumber {
-
-  /**
-   * name of transaction party. For ATM transaction, masked card number used in transaction
-   */
-  partyInfo?: string;
-
-  /**
-   * whole account number including bank of transaction party. For ATM transaction, address of ATM if known. For card transaction, identification (name) of the merchant.
-   */
-  partyDescription?: string;
 }

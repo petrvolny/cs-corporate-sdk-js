@@ -2,7 +2,7 @@ import * as CSCoreSDK from 'cs-core-sdk';
 import { RelationshipManagerPhotoResource } from './photo/photo';
 
 export class RelationshipManagersResource extends CSCoreSDK.Resource
-implements CSCoreSDK.ListEnabled<RelationshipManager>, CSCoreSDK.HasInstanceResource<RelationshipManagerResource> {
+  implements CSCoreSDK.ListEnabled<RelationshipManager>, CSCoreSDK.HasInstanceResource<RelationshipManagerResource> {
 
   /**
    * List all relationship managers grouped by their positions. You will get an array of positions whilst each position may include one or more relationship managers. Typically there should be just one position flagged as primary as well as one contact in each position. 
@@ -14,7 +14,7 @@ implements CSCoreSDK.ListEnabled<RelationshipManager>, CSCoreSDK.HasInstanceReso
 
       // Add convenience methods to listing items
       response.items.forEach(item => {
-        if(Array.isArray((<RelationshipManager>item).employees)) {
+        if (Array.isArray((<RelationshipManager>item).employees)) {
 
           (<RelationshipManager>item).employees.forEach(employee => {
             resourcifyListing(<ListingEmployee>employee, this.withId((<ListingEmployee>employee).empId), true);
@@ -29,20 +29,20 @@ implements CSCoreSDK.ListEnabled<RelationshipManager>, CSCoreSDK.HasInstanceReso
   /**
    * Returns RelationshipManagerResource for a given employee id
    */
-  withId = (emplId: string|number): RelationshipManagerResource => {
+  withId = (emplId: string | number): RelationshipManagerResource => {
 
     return new RelationshipManagerResource(emplId, this.getPath(), this.getClient());
   }
 }
 
 export class RelationshipManagerResource extends CSCoreSDK.InstanceResource
-implements CSCoreSDK.GetEnabled<EmployeeDetail> {
+  implements CSCoreSDK.GetEnabled<EmployeeDetail> {
 
   /**
    * Get a reletionshipt manager detail
    */
   get = (): Promise<EmployeeDetail> => {
-    
+
     return CSCoreSDK.ResourceUtils.CallGet(this, null).then(response => {
 
       // Add convenience methods to response
@@ -61,8 +61,8 @@ implements CSCoreSDK.GetEnabled<EmployeeDetail> {
   }
 }
 
-const resourcifyListing = (employee: ListingEmployee|EmployeeDetail, employeeReference: RelationshipManagerResource, isFromListing) => {
-  if(isFromListing) {
+const resourcifyListing = (employee: ListingEmployee | EmployeeDetail, employeeReference: RelationshipManagerResource, isFromListing) => {
+  if (isFromListing) {
     (<any>employee).get = employeeReference.get;
   }
   employee.photo = employeeReference.photo;
@@ -76,7 +76,7 @@ export interface RelationshipManagerListParameters {
   filter?: string;
 }
 
-export interface RelationshipManagerList extends CSCoreSDK.ListResponse<RelationshipManager> {}
+export interface RelationshipManagerList extends CSCoreSDK.ListResponse<RelationshipManager> { }
 
 export interface RelationshipManager {
 
@@ -104,11 +104,6 @@ export interface RelationshipManager {
 export interface Employee {
 
   /**
-   * API user identifier.
-   */
-  id: string;
-
-  /**
    * Employee id, used in API-s like PhoneBook
    */
   empId?: number;
@@ -131,7 +126,7 @@ export interface Employee {
   /**
    * Convenience method for getting detail of the relationship manager from the list 
    */
-  get: () => Promise<Employee|RelationshipManager>;
+  get: () => Promise<Employee | RelationshipManager>;
 }
 
 export interface ListingEmployee extends Employee {
@@ -150,11 +145,6 @@ export interface EmployeeDetail extends Employee {
   personalNumber?: number;
 
   /**
-   * Employee login name
-   */
-  loginName?: string;
-
-  /**
    * Title
    */
   titleA?: string;
@@ -163,6 +153,16 @@ export interface EmployeeDetail extends Employee {
    * Title
    */
   titleB?: string;
+
+  /**
+   * First name
+   */
+  name?: string;
+
+  /**
+   * Surname
+   */
+  surname?: string;
 
   /**
    * Full name composite
@@ -175,6 +175,16 @@ export interface EmployeeDetail extends Employee {
   gender?: string;
 
   /**
+   * Identifier of employee manager
+   */
+  employeeManagerId?: number;
+
+  /**
+   * Identifier of employee team
+   */
+  teamId?: string;
+
+  /**
    * Contact details
    */
   contact?: {
@@ -183,6 +193,11 @@ export interface EmployeeDetail extends Employee {
      * Contact details id
      */
     id?: number;
+
+    /**
+     * Employee login name
+     */
+    loginName?: string;
 
     /**
      * Email of the employee
@@ -215,9 +230,14 @@ export interface EmployeeDetail extends Employee {
     officeNumber?: string;
 
     /**
-     * Code of a segment of the employee
+     * Contact cost unit
      */
-    segment?: string;
+    costUnit?: number;
+
+    /**
+     * Contact location unit
+     */
+    locationUnit?: string;
 
     /**
      * Building details
@@ -228,6 +248,11 @@ export interface EmployeeDetail extends Employee {
        * Building identifier
        */
       id?: number;
+
+      /**
+       * Company code
+       */
+      companyCode?: string;
 
       /**
        * Street name of a building
@@ -252,77 +277,113 @@ export interface EmployeeDetail extends Employee {
         /**
          * Country code of a building
          */
-        code?: string;
+        country?: string;
 
         /**
-         * Country name of a building
+         * Localized country name
          */
-        name?: string;
-      }
+        nameI18N?: string;
+      };
     };
+  };
+
+  /**
+   * Department Info
+   */
+  department?: {
 
     /**
-     * Department Info
+     * Country name of a building
      */
-    department?: {
+    id?: number;
+
+    /**
+     * Department code
+     */
+    departmentCode?: string;
+
+    /**
+     * Department name
+     */
+    nameI18N?: string;
+
+    /**
+     * Department head id
+     */
+    headId?: number;
+
+    /**
+     * Department parent id
+     */
+    parentId?: number;
+
+    /**
+     * Company info
+     */
+    company?: {
 
       /**
-       * Country name of a building
+       * Company code
        */
-      id?: number;
+      companyCode?: string;
 
       /**
-       * Department code
+       * Company name
        */
-      departmentCode?: string;
+      nameI18N?: string;
 
       /**
-       * Department name
+       * Company name in English
        */
-      name?: string;
+      nameI18N_EN?: string;
 
       /**
-       * Company info
+       * Department prefix
        */
-      company?: {
-
-        /**
-         * Company code
-         */
-        code?: string;
-
-        /**
-         * Company name
-         */
-        name?: string;
-
-        /**
-         * Company code
-         */
-        displayCode?: string;
-      };
+      departmentPrefix?: number;
 
       /**
-       * Position info
+       * Company code
        */
-      position?: {
+      displayCode?: string;
 
-        /**
-         * Position identifier
-         */
-        id?: number;
+      /**
+       * Manually updated flag
+       */
+      manuallyUpdated?: boolean;
 
-        /**
-         * Position code
-         */
-        positionCode?: string;
-
-        /**
-         * Position description
-         */
-        description?: string;
-      };
+      /**
+       * Department exists flag
+       */
+      departmentExists?: boolean;
     };
+
+  };
+
+  /**
+   * Position info
+   */
+  position?: {
+
+    /**
+     * Position identifier
+     */
+    id?: number;
+
+    /**
+     * Position code
+     */
+    positionCode?: string;
+
+    /**
+     * Position description
+     */
+    descriptionI18N?: string;
+
+    /**
+     * Company code
+     */
+    companyCode?: string;
   };
 
   /**

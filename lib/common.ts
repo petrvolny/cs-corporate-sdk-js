@@ -24,6 +24,16 @@ export interface AccountNumber {
    * id of bank/branch, constant for domestic accounts in csas
    */
   bic?: string;
+
+  /**
+   * Info
+   */
+  accountPartyInfo?: string;
+
+  /**
+   * Description
+   */
+  accountPartyDescription?: string;
 }
 
 export interface Amount {
