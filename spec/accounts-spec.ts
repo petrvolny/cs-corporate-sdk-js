@@ -50,6 +50,9 @@ const testTransactions = response => {
     valuationDate: new Date(2016, 5, 20),
   });
 
+  console.log(item.bookingDate, item.bookingDate.toString(), 'dates', CSCoreSDK.EntityUtils.parseISODate(new Date(2016, 5, 20)), new Date(CSCoreSDK.EntityUtils.parseISODate(new Date(2016, 5, 20))), new Date(CSCoreSDK.EntityUtils.parseISODate(new Date(2016, 5, 20))).toString());
+  expect(item.bookingDate.toString()).toBe(new Date(CSCoreSDK.EntityUtils.parseISODate(new Date(2016, 5, 20))).toString());
+
   expect(item.accountParty.accountNumber).toBe('223149101');
   expect(item.accountParty.bankCode).toBe('0100');
 
