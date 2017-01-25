@@ -190,11 +190,6 @@ export interface EmployeeDetail extends Employee {
   contact?: {
 
     /**
-     * Contact details id
-     */
-    id?: number;
-
-    /**
      * Employee login name
      */
     loginName?: string;

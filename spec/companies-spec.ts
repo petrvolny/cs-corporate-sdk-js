@@ -52,7 +52,6 @@ const testCampaigns = response => {
   expect(item.id).toBe(123);
   expect(item.name).toBe('Campaign');
   expect(item.channel).toBe('ATM');
-  expect(item.channelI18N).toBe('bankomat');
   expect(item.comment).toBe('Campaign comment');
   expect(item.targetListId).toBe(111);
   expectDate(item, {
@@ -99,7 +98,6 @@ const testRelationshipManagerDetail = response => {
   expect(response.department.nameI18N).toBe('Univerzální pob. Praha 2(Jugoslávská 19)');
   expect(response.department.headId).toBe(584607);
   expect(response.department.parentId).toBe(40004618);
-  expect(response.department.cacheIdentifier).toBe(40000970);
   
   expect(response.department.company.companyCode).toBe('CS');
   expect(response.department.company.nameI18N).toBe('Česká spořitelna, a.s.');
@@ -108,7 +106,6 @@ const testRelationshipManagerDetail = response => {
   expect(response.department.company.displayCode).toBe('CS');
   expect(response.department.company.manuallyUpdated).toBe(false);
   expect(response.department.company.departmentExists).toBe(true);
-  expect(response.department.company.cacheIdentifier).toBe('CS');
   
   expect(response.teamId).toBe('010004MAM006');
 
@@ -116,7 +113,6 @@ const testRelationshipManagerDetail = response => {
   expect(response.position.positionCode).toBe('ADV1');
   expect(response.position.descriptionI18N).toBe('poradce');
   expect(response.position.companyCode).toBe('CS');
-  expect(response.position.cacheIdentifier).toBe(40000856);
 }
 
 describe("Corporate SDK", function () {

@@ -43,11 +43,6 @@ export interface Campaign {
   channel?: string;
 
   /**
-   * Localized channel of a campaign 
-   */
-  channelI18N?: string;
-
-  /**
    * Comment 
    */
   comment?: string;
