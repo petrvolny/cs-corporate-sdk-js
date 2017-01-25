@@ -30,7 +30,7 @@ You can list all companies by calling the `list` method on [CompaniesResource](.
 
 ## 2. Get company detail 
 
-Get company detail by getting the [CompanyResource](../lib/companies/companies.ts#L33) and then calling the `get` method on it. For full response see [Company](../lib/companies/companies.ts#L57) interface.
+Get company detail by getting the [CompanyResource](../lib/companies/companies.ts#L33) and then calling the `get` method on it. For full response see [Company](../lib/companies/companies.ts#L77) interface.
 
 ```javascript
 
