@@ -56,7 +56,7 @@ const testCampaigns = response => {
   expect(item.comment).toBe('Campaign comment');
   expect(item.targetListId).toBe(111);
   expectDate(item, {
-    endDate: new Date(2014, 10, 26),
+    endDate: '2014-11-26T00:00:00+01:00',
   });
 }
 
