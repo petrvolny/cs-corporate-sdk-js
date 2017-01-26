@@ -80,7 +80,7 @@ export interface Account {
   /**
    * Account owner
    */
-  accountOwber: AccountOwner;
+  accountOwner: AccountOwner;
 
   /**
   * Convenience getter for getting accounts's transactions resource

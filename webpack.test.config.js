@@ -42,7 +42,7 @@ if(args.indexOf('--target-browser') !== -1){
                            { raw: true, entryOnly: false }));
     //new webpack.optimize.UglifyJsPlugin()
     //new webpack.IgnorePlugin(/webpack.\.js$/),
-  externals['jasmine-ajax'] = "underscore"  
+  externals['jasmine-ajax'] = "underscore"
 }
 //console.log("Externals are: ", externals)
 
@@ -69,7 +69,7 @@ module.exports = {
   devtool: 'source-map',
   // Add minification
   plugins: plugins,
-  
+
   module: {
     loaders: [
       { test: /\.json$/, loader: "json-loader" },
