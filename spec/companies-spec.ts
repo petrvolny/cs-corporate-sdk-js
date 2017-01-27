@@ -1,3 +1,4 @@
+/// <reference path="../node_modules/cs-core-sdk/dist/cs-core-sdk.sfx.d.ts"/>
 /// <reference path="../build/cs-corporate-sdk.sfx.d.ts"/>
 /// <reference types="jasmine" />
 /// <reference types="node" />
@@ -16,7 +17,7 @@ const path = require('path');
 function testFile(response, fileName = 'test-pdf.pdf') {
   if (fs) {
       const file = fs.readFileSync(path.join(__dirname, fileName));
-      expect(_.isEqual(file.toString(), response.toString())).toBe(true);    
+      expect(_.isEqual(file.toString(), response.toString())).toBe(true);
   }
   expect(response).toBeTruthy();
   const str = String.fromCharCode.apply(null, new Uint8Array(response));;
@@ -33,7 +34,7 @@ const testCompanyDetail = response => {
   expect(response.relationshipManagers).toBeDefined();
   expect(response.campaigns).toBeDefined();
   expect(response.relationshipManagers).toBeDefined();
-  
+
   expect(response.companyProfile.cnbType).toBe('180');
   expect(response.companyProfile.cnbTypeI18N).toBe('Příspěvkové a jiné organiz. v působ. územních samospr. celků');
   expect(response.companyProfile.industryCategory).toBe('853110');
@@ -98,7 +99,7 @@ const testRelationshipManagerDetail = response => {
   expect(response.department.nameI18N).toBe('Univerzální pob. Praha 2(Jugoslávská 19)');
   expect(response.department.headId).toBe(584607);
   expect(response.department.parentId).toBe(40004618);
-  
+
   expect(response.department.company.companyCode).toBe('CS');
   expect(response.department.company.nameI18N).toBe('Česká spořitelna, a.s.');
   expect(response.department.company.nameI18N_EN).toBe('Česká spořitelna, a.s. - english');
@@ -106,7 +107,7 @@ const testRelationshipManagerDetail = response => {
   expect(response.department.company.displayCode).toBe('CS');
   expect(response.department.company.manuallyUpdated).toBe(false);
   expect(response.department.company.departmentExists).toBe(true);
-  
+
   expect(response.teamId).toBe('010004MAM006');
 
   expect(response.position.id).toBe(40000856);
@@ -248,7 +249,7 @@ describe("Corporate SDK", function () {
       return client.companies.withId('49624911').relationshipManagers.withId('583876').get();
     }).then(response => {
       testRelationshipManagerDetail(response);
-      
+
       done();
     }).catch(logJudgeError);
   });
