@@ -17,7 +17,12 @@ before_install:
 before_script:
   - "sleep 10"
 script:
+  - git config --global user.name "CSAS Developers"
+  - git config --global user.email developers@csas.cz
+  - git config --global push.default current
   - "npm test"
+after_success:
+  - sh ./tooling/sign.sh
 addons:
   packages:
     - unzip
