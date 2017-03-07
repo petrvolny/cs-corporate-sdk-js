@@ -2,11 +2,18 @@ import * as CSCoreSDK from 'cs-core-sdk';
 import { CampaignsResource } from './campaigns';
 import { RelationshipManagersResource } from './relationship-managers';
 
+/**
+ * @class {CampaignsResource}
+ * @extends {CSCoreSDK.Resource}
+ * @implements {CSCoreSDK.HasInstanceResource<CompanyResource>}
+ * @implements {CSCoreSDK.ListEnabled<Company>}
+ */
 export class CompaniesResource extends CSCoreSDK.Resource
   implements CSCoreSDK.HasInstanceResource<CompanyResource>, CSCoreSDK.ListEnabled<Company> {
 
   /**
    * List of companies associated with client including the type of relationship from the current client to the subject.
+   * @returns {Promise<CompanyList>}
    */
   list = (): Promise<CompanyList> => {
 
@@ -23,6 +30,8 @@ export class CompaniesResource extends CSCoreSDK.Resource
 
   /**
    * Get a Company resource for company with a given ico representing registration number
+   * @param {string|number} ico
+   * @returns {CompanyResource}
    */
   withId = (ico: string | number): CompanyResource => {
 
@@ -30,11 +39,17 @@ export class CompaniesResource extends CSCoreSDK.Resource
   }
 }
 
+/**
+ * @class {CompanyResource}
+ * @extends {CSCoreSDK.InstanceResource}
+ * @implements {CSCoreSDK.GetEnabled<Company>}
+ */
 export class CompanyResource extends CSCoreSDK.InstanceResource
   implements CSCoreSDK.GetEnabled<Company> {
 
   /**
    * Get company detail
+   * @returns {Promise<Company>}
    */
   get = (): Promise<Company> => {
 
@@ -49,6 +64,7 @@ export class CompanyResource extends CSCoreSDK.InstanceResource
 
   /**
    * Returns CampaignsResource for listing company's campaigns
+   * @returns {CampaignsResource}
    */
   get campaigns(): CampaignsResource {
 
@@ -57,6 +73,7 @@ export class CompanyResource extends CSCoreSDK.InstanceResource
 
   /**
    * Returns RelationshipManagersResource for listing company's relationship managers and info about them including photo
+   * @returns {RelationshipManagersResource}
    */
   get relationshipManagers(): RelationshipManagersResource {
 
@@ -72,8 +89,15 @@ const resourcifyListing = (company: Company, companyReference: CompanyResource, 
   company.relationshipManagers = companyReference.relationshipManagers;
 }
 
+/**
+ * @interface CompanyList
+ * @extends {CSCoreSDK.ListResponse<Company>}
+ */
 export interface CompanyList extends CSCoreSDK.ListResponse<Company> { }
 
+/**
+ * @interface Company
+ */
 export interface Company {
 
   /**
@@ -165,6 +189,7 @@ export interface Company {
 
   /**
    * Convenience method for getting detail of the company right from the list 
+   * @returns {Promise<Company>}
    */
   get: () => Promise<Company>;
 }

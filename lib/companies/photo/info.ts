@@ -1,10 +1,16 @@
 import * as CSCoreSDK from 'cs-core-sdk';
 
+/**
+ * @class {RelationshipManagerPhotoInfoResource}
+ * @extends {CSCoreSDK.Resource}
+ * @implements {CSCoreSDK.GetEnabled<RelationshipManagerPhotoInfo>}
+ */
 export class RelationshipManagerPhotoInfoResource extends CSCoreSDK.Resource
   implements CSCoreSDK.GetEnabled<RelationshipManagerPhotoInfo> {
 
   /**
    * Get information about the relationship manager photo
+   * @returns {Promise<RelationshipManagerPhotoInfo>}
    */
   get = (): Promise<RelationshipManagerPhotoInfo> => {
 
@@ -18,6 +24,9 @@ export class RelationshipManagerPhotoInfoResource extends CSCoreSDK.Resource
   }
 }
 
+/**
+ * @interface RelationshipManagerPhotoInfo
+ */
 export interface RelationshipManagerPhotoInfo {
 
   /**

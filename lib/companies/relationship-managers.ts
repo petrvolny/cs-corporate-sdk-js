@@ -1,12 +1,20 @@
 import * as CSCoreSDK from 'cs-core-sdk';
 import { RelationshipManagerPhotoResource } from './photo/photo';
 
+/**
+ * @class {RelationshipManagersResource}
+ * @extends {CSCoreSDK.Resource}
+ * @implements {CSCoreSDK.ListEnabled<RelationshipManager>}
+ * @implements {CSCoreSDK.HasInstanceResource<RelationshipManagerResource>}
+ */
 export class RelationshipManagersResource extends CSCoreSDK.Resource
   implements CSCoreSDK.ListEnabled<RelationshipManager>, CSCoreSDK.HasInstanceResource<RelationshipManagerResource> {
 
   /**
    * List all relationship managers grouped by their positions. You will get an array of positions whilst each position may include one or more relationship managers. Typically there should be just one position flagged as primary as well as one contact in each position. 
    * You can filter for all positions (ALL) or for primary only (PRIMARY).
+   * @param {RelationshipManagerListParameters=} params
+   * @returns {Promise<RelationshipManagerList>}
    */
   list = (params?: RelationshipManagerListParameters): Promise<RelationshipManagerList> => {
 
@@ -28,6 +36,8 @@ export class RelationshipManagersResource extends CSCoreSDK.Resource
 
   /**
    * Returns RelationshipManagerResource for a given employee id
+   * @param {string|number} emplId
+   * @returns {RelationshipManagerResource}
    */
   withId = (emplId: string | number): RelationshipManagerResource => {
 
@@ -35,11 +45,17 @@ export class RelationshipManagersResource extends CSCoreSDK.Resource
   }
 }
 
+/**
+ * @class {RelationshipManagerResource}
+ * @extends {CSCoreSDK.InstanceResource}
+ * @implements {CSCoreSDK.GetEnabled<EmployeeDetail>}
+ */
 export class RelationshipManagerResource extends CSCoreSDK.InstanceResource
   implements CSCoreSDK.GetEnabled<EmployeeDetail> {
 
   /**
    * Get a reletionshipt manager detail
+   * @returns {Promise<EmployeeDetail>}
    */
   get = (): Promise<EmployeeDetail> => {
 
@@ -54,6 +70,7 @@ export class RelationshipManagerResource extends CSCoreSDK.InstanceResource
 
   /**
    * Returns RelationshipManagerPhotoResource for getting relationship managers photo
+   * @returns {RelationshipManagerPhotoResource}
    */
   get photo(): RelationshipManagerPhotoResource {
 
@@ -68,6 +85,9 @@ const resourcifyListing = (employee: ListingEmployee | EmployeeDetail, employeeR
   employee.photo = employeeReference.photo;
 }
 
+/**
+ * @interface RelationshipManagerListParameters
+ */
 export interface RelationshipManagerListParameters {
 
   /**
@@ -76,8 +96,15 @@ export interface RelationshipManagerListParameters {
   filter?: string;
 }
 
+/**
+ * @interface RelationshipManagerList
+ * @extends {CSCoreSDK.ListResponse<RelationshipManager>}
+ */
 export interface RelationshipManagerList extends CSCoreSDK.ListResponse<RelationshipManager> { }
 
+/**
+ * @interface RelationshipManager
+ */
 export interface RelationshipManager {
 
   /**
@@ -101,6 +128,9 @@ export interface RelationshipManager {
   employees: [ListingEmployee];
 }
 
+/**
+ * @interface Employee
+ */
 export interface Employee {
 
   /**
@@ -125,10 +155,15 @@ export interface Employee {
 
   /**
    * Convenience method for getting detail of the relationship manager from the list 
+   * @returns {Promise<Employee>|Promise<RelationshipManager>}
    */
   get: () => Promise<Employee | RelationshipManager>;
 }
 
+/**
+ * @interface ListingEmployee
+ * @extends {Employee}
+ */
 export interface ListingEmployee extends Employee {
 
   /**
@@ -137,6 +172,10 @@ export interface ListingEmployee extends Employee {
   primaryFlag?: boolean;
 }
 
+/**
+ * @interface EmployeeDetail
+ * @extends {Employee}
+ */
 export interface EmployeeDetail extends Employee {
 
   /**
@@ -388,6 +427,7 @@ export interface EmployeeDetail extends Employee {
 
   /**
    * Convenience method for getting detail of the relationship manager right from the list 
+   * @returns {Promise<RelationshipManager>}
    */
   get: () => Promise<RelationshipManager>;
 };

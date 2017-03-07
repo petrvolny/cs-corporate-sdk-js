@@ -1,10 +1,16 @@
 import * as CSCoreSDK from 'cs-core-sdk';
 
+/**
+ * @class {CampaignsResource}
+ * @extends {CSCoreSDK.Resource}
+ * @implements {CSCoreSDK.ListEnabled<Campaign>}
+ */
 export class CampaignsResource extends CSCoreSDK.Resource
-implements CSCoreSDK.ListEnabled<Campaign> {
+  implements CSCoreSDK.ListEnabled<Campaign> {
 
   /**
    * List marketing campaigns
+   * @returns {Promise<CampaignList>}
    */
   list = (): Promise<CampaignList> => {
 
@@ -18,8 +24,15 @@ implements CSCoreSDK.ListEnabled<Campaign> {
   }
 }
 
-export interface CampaignList extends CSCoreSDK.ListResponse<Campaign> {}
+/**
+ * @interface CampaignList
+ * @extends {CSCoreSDK.ListResponse<Campaign>}
+ */
+export interface CampaignList extends CSCoreSDK.ListResponse<Campaign> { }
 
+/**
+ * @interface Campaign
+ */
 export interface Campaign {
 
   /**

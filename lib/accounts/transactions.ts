@@ -1,11 +1,18 @@
 import * as CSCoreSDK from 'cs-core-sdk';
 import { AccountNumber, Amount } from '../common';
 
+/**
+ * @class {TransactionsResource}
+ * @extends {CSCoreSDK.Resource}
+ * @implements {CSCoreSDK.PaginatedListEnabled<Transaction>}
+ */
 export class TransactionsResource extends CSCoreSDK.Resource
   implements CSCoreSDK.PaginatedListEnabled<Transaction> {
 
   /**
    * List accounts transactions
+   * @param {TransactionsParameters} params
+   * @returns {Promise<TransactionList>}
    */
   list = (params: TransactionsParameters): Promise<TransactionList> => {
 
@@ -25,6 +32,11 @@ export class TransactionsResource extends CSCoreSDK.Resource
   }
 }
 
+/**
+ * @interface TransactionsParameters
+ * @extends {CSCoreSDK.Paginated}
+ * @extends {CSCoreSDK.Sortable}
+ */
 export interface TransactionsParameters extends CSCoreSDK.Paginated, CSCoreSDK.Sortable {
 
   /**
@@ -38,8 +50,15 @@ export interface TransactionsParameters extends CSCoreSDK.Paginated, CSCoreSDK.S
   dateEnd: Date;
 }
 
+/**
+ * @interface TransactionList
+ * @extends {CSCoreSDK.PaginatedListResponse<Transaction>}
+ */
 export interface TransactionList extends CSCoreSDK.PaginatedListResponse<Transaction> { }
 
+/**
+ * @interface Transaction
+ */
 export interface Transaction {
 
   /**

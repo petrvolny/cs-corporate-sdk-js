@@ -1,3 +1,7 @@
+
+/**
+ * @interface AccountNumber
+ */
 export interface AccountNumber {
 
   /**
@@ -36,6 +40,9 @@ export interface AccountNumber {
   accountPartyDescription?: string;
 }
 
+/**
+ * @interface Amount
+ */
 export interface Amount {
 
   /**

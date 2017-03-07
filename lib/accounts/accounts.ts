@@ -3,11 +3,18 @@ import { AccountNumber } from '../common';
 import { BalanceResource } from './balance';
 import { TransactionsResource } from './transactions';
 
+/**
+ * @class {AccountsResource}
+ * @extends {CSCoreSDK.Resource}
+ * @implements {CSCoreSDK.PaginatedListEnabled<Account>}
+ */
 export class AccountsResource extends CSCoreSDK.Resource
   implements CSCoreSDK.PaginatedListEnabled<Account> {
 
   /**
    * List bank accounts incl. basic account information the current user can see accordign to disposition model.
+   * @param {AccountsParameters=} params
+   * @returns {Promise<AccountList>}
    */
   list = (params?: AccountsParameters): Promise<AccountList> => {
     return CSCoreSDK.ResourceUtils.CallPaginatedListWithSuffix(this, null, 'accounts', params, response => {
@@ -23,16 +30,23 @@ export class AccountsResource extends CSCoreSDK.Resource
 
   /**
    * Returns Account resource with a given ID
+   * @param {number|string} accountId
+   * @returns {AccountResource}
    */
   withId = (accountId: number | string): AccountResource => {
     return new AccountResource(accountId, this.getPath(), this.getClient());
   }
 }
 
+/**
+ * @class {AccountResource}
+ * @extends {CSCoreSDK.InstanceResource}
+ */
 export class AccountResource extends CSCoreSDK.InstanceResource {
 
   /**
    * Returns resource for getting accounts balance
+   * @returns {BalanceResource}
    */
   get balance(): BalanceResource {
     return new BalanceResource(`${this.getPath()}/balance`, this.getClient());
@@ -40,6 +54,7 @@ export class AccountResource extends CSCoreSDK.InstanceResource {
 
   /**
    * Returns resource for getting accounts transactions
+   * @returns {TransactionsResource}
    */
   get transactions(): TransactionsResource {
     return new TransactionsResource(`${this.getPath()}/transactions`, this.getClient());
@@ -51,10 +66,22 @@ const resourcifyListing = (account: Account, accountReference: AccountResource) 
   account.balance = accountReference.balance;
 }
 
+/**
+ * @interface AccountsParameters
+ * @extends {CSCoreSDK.Sortable}
+ * @extends {CSCoreSDK.Paginated}
+ */
 export interface AccountsParameters extends CSCoreSDK.Sortable, CSCoreSDK.Paginated { }
 
+/**
+ * @interface AccountList
+ * @extends {CSCoreSDK.PaginatedListResponse<Account>}
+ */
 export interface AccountList extends CSCoreSDK.PaginatedListResponse<Account> { }
 
+/**
+ * @interface Account
+ */
 export interface Account {
 
   /**
@@ -93,6 +120,9 @@ export interface Account {
   balance: BalanceResource;
 }
 
+/**
+ * @interface AccountOwner
+ */
 export interface AccountOwner {
 
   /**

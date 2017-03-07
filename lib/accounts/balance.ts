@@ -1,11 +1,17 @@
 import * as CSCoreSDK from 'cs-core-sdk';
 import { Amount } from '../common';
 
+/**
+ * @class {BalanceResource}
+ * @extends {CSCoreSDK.Resource}
+ * @implements {CSCoreSDK.GetEnabled<AccountBalance>}
+ */
 export class BalanceResource extends CSCoreSDK.Resource
   implements CSCoreSDK.GetEnabled<AccountBalance> {
 
   /**
    * Get balance of the account
+   * @returns {Promise<AccountBalance>}
    */
   get = (): Promise<AccountBalance> => {
 
@@ -19,6 +25,9 @@ export class BalanceResource extends CSCoreSDK.Resource
   }
 }
 
+/**
+ * @interface AccountBalance
+ */
 export interface AccountBalance {
 
   /**
