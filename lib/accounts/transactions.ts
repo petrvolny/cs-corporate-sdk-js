@@ -2,13 +2,13 @@ import * as CSCoreSDK from 'cs-core-sdk';
 import { AccountNumber, Amount } from '../common';
 
 export class TransactionsResource extends CSCoreSDK.Resource
-implements CSCoreSDK.PaginatedListEnabled<Transaction> {
+  implements CSCoreSDK.PaginatedListEnabled<Transaction> {
 
   /**
    * List accounts transactions
    */
   list = (params: TransactionsParameters): Promise<TransactionList> => {
-    
+
     // transform date objects to ISO strings
     CSCoreSDK.EntityUtils.transformDatesToISO(['dateStart', 'dateEnd'], params);
 
@@ -38,7 +38,7 @@ export interface TransactionsParameters extends CSCoreSDK.Paginated, CSCoreSDK.S
   dateEnd: Date;
 }
 
-export interface TransactionList extends CSCoreSDK.PaginatedListResponse<Transaction> {}
+export interface TransactionList extends CSCoreSDK.PaginatedListResponse<Transaction> { }
 
 export interface Transaction {
 

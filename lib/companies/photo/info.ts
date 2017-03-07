@@ -1,13 +1,13 @@
 import * as CSCoreSDK from 'cs-core-sdk';
 
 export class RelationshipManagerPhotoInfoResource extends CSCoreSDK.Resource
-implements CSCoreSDK.GetEnabled<RelationshipManagerPhotoInfo> {
+  implements CSCoreSDK.GetEnabled<RelationshipManagerPhotoInfo> {
 
   /**
    * Get information about the relationship manager photo
    */
   get = (): Promise<RelationshipManagerPhotoInfo> => {
-    
+
     return CSCoreSDK.ResourceUtils.CallGet(this, null).then(response => {
 
       // transform ISO strings to date objects

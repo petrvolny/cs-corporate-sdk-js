@@ -3,7 +3,7 @@ import { CampaignsResource } from './campaigns';
 import { RelationshipManagersResource } from './relationship-managers';
 
 export class CompaniesResource extends CSCoreSDK.Resource
-implements CSCoreSDK.HasInstanceResource<CompanyResource>, CSCoreSDK.ListEnabled<Company> {
+  implements CSCoreSDK.HasInstanceResource<CompanyResource>, CSCoreSDK.ListEnabled<Company> {
 
   /**
    * List of companies associated with client including the type of relationship from the current client to the subject.
@@ -20,18 +20,18 @@ implements CSCoreSDK.HasInstanceResource<CompanyResource>, CSCoreSDK.ListEnabled
       return response;
     });
   }
-  
+
   /**
    * Get a Company resource for company with a given ico representing registration number
    */
-  withId = (ico: string|number): CompanyResource => {
-    
+  withId = (ico: string | number): CompanyResource => {
+
     return new CompanyResource(ico, this.getPath(), this.getClient());
   }
 }
 
 export class CompanyResource extends CSCoreSDK.InstanceResource
-implements CSCoreSDK.GetEnabled<Company> {
+  implements CSCoreSDK.GetEnabled<Company> {
 
   /**
    * Get company detail
@@ -65,14 +65,14 @@ implements CSCoreSDK.GetEnabled<Company> {
 }
 
 const resourcifyListing = (company: Company, companyReference: CompanyResource, isListing) => {
-  if(isListing) {
+  if (isListing) {
     company.get = companyReference.get;
   }
   company.campaigns = companyReference.campaigns;
   company.relationshipManagers = companyReference.relationshipManagers;
 }
 
-export interface CompanyList extends CSCoreSDK.ListResponse<Company> {}
+export interface CompanyList extends CSCoreSDK.ListResponse<Company> { }
 
 export interface Company {
 
@@ -152,15 +152,15 @@ export interface Company {
      */
     relationshipTypeI18N?: string;
   }
-  
- /**
-  * Convenience getter for getting companies's campaigns resource
-  */
+
+  /**
+   * Convenience getter for getting companies's campaigns resource
+   */
   campaigns: CampaignsResource;
 
- /**
-  * Convenience getter for getting companies's relationship managers resource
-  */
+  /**
+   * Convenience getter for getting companies's relationship managers resource
+   */
   relationshipManagers: RelationshipManagersResource;
 
   /**

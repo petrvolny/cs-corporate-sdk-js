@@ -2,7 +2,7 @@ import * as CSCoreSDK from 'cs-core-sdk';
 import { Amount } from '../common';
 
 export class BalanceResource extends CSCoreSDK.Resource
-implements CSCoreSDK.GetEnabled<AccountBalance> {
+  implements CSCoreSDK.GetEnabled<AccountBalance> {
 
   /**
    * Get balance of the account

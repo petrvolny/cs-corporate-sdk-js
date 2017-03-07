@@ -4,7 +4,7 @@ import { BalanceResource } from './balance';
 import { TransactionsResource } from './transactions';
 
 export class AccountsResource extends CSCoreSDK.Resource
-implements CSCoreSDK.PaginatedListEnabled<Account> {
+  implements CSCoreSDK.PaginatedListEnabled<Account> {
 
   /**
    * List bank accounts incl. basic account information the current user can see accordign to disposition model.
@@ -24,7 +24,7 @@ implements CSCoreSDK.PaginatedListEnabled<Account> {
   /**
    * Returns Account resource with a given ID
    */
-  withId = (accountId: number|string): AccountResource => {
+  withId = (accountId: number | string): AccountResource => {
     return new AccountResource(accountId, this.getPath(), this.getClient());
   }
 }
@@ -51,9 +51,9 @@ const resourcifyListing = (account: Account, accountReference: AccountResource) 
   account.balance = accountReference.balance;
 }
 
-export interface AccountsParameters extends CSCoreSDK.Sortable, CSCoreSDK.Paginated {}
+export interface AccountsParameters extends CSCoreSDK.Sortable, CSCoreSDK.Paginated { }
 
-export interface AccountList extends CSCoreSDK.PaginatedListResponse<Account> {}
+export interface AccountList extends CSCoreSDK.PaginatedListResponse<Account> { }
 
 export interface Account {
 

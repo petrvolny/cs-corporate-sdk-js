@@ -15,7 +15,7 @@ export class RelationshipManagerPhotoResource extends CSCoreSDK.Resource {
    * Returns RelationshipManagerPhotoInfoResource for getting infomation about the photo
    */
   get info(): RelationshipManagerPhotoInfoResource {
-    
+
     return new RelationshipManagerPhotoInfoResource(`${this.getPath()}/info`, this.getClient());
   }
 }
