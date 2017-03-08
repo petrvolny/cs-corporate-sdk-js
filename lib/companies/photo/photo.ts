@@ -2,7 +2,7 @@ import * as CSCoreSDK from 'cs-core-sdk';
 import { RelationshipManagerPhotoInfoResource } from './info';
 
 /**
- * @class {RelationshipManagerPhotoResource}
+ * @class RelationshipManagerPhotoResource
  * @implements {CSCoreSDK.Resource}
  */
 export class RelationshipManagerPhotoResource extends CSCoreSDK.Resource {

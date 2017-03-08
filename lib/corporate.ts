@@ -20,7 +20,7 @@ export function getClient(): CorporateClient {
 
 /**
  * Corporate client
- * @class {CorporateClient}
+ * @class CorporateClient
  * @extends {CSCoreSDK.WebApiClient}
  */
 export class CorporateClient extends CSCoreSDK.WebApiClient {

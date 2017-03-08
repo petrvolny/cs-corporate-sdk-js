@@ -1,7 +1,7 @@
 import * as CSCoreSDK from 'cs-core-sdk';
 
 /**
- * @class {CampaignsResource}
+ * @class CampaignsResource
  * @extends {CSCoreSDK.Resource}
  * @implements {CSCoreSDK.ListEnabled<Campaign>}
  */

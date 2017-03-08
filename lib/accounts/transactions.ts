@@ -2,7 +2,7 @@ import * as CSCoreSDK from 'cs-core-sdk';
 import { AccountNumber, Amount } from '../common';
 
 /**
- * @class {TransactionsResource}
+ * @class TransactionsResource
  * @extends {CSCoreSDK.Resource}
  * @implements {CSCoreSDK.PaginatedListEnabled<Transaction>}
  */

@@ -1,7 +1,7 @@
 import * as CSCoreSDK from 'cs-core-sdk';
 
 /**
- * @class {RelationshipManagerPhotoInfoResource}
+ * @class RelationshipManagerPhotoInfoResource
  * @extends {CSCoreSDK.Resource}
  * @implements {CSCoreSDK.GetEnabled<RelationshipManagerPhotoInfo>}
  */

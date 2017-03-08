@@ -2,7 +2,7 @@ import * as CSCoreSDK from 'cs-core-sdk';
 import { Amount } from '../common';
 
 /**
- * @class {BalanceResource}
+ * @class BalanceResource
  * @extends {CSCoreSDK.Resource}
  * @implements {CSCoreSDK.GetEnabled<AccountBalance>}
  */

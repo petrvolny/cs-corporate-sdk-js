@@ -3,7 +3,7 @@ import { CampaignsResource } from './campaigns';
 import { RelationshipManagersResource } from './relationship-managers';
 
 /**
- * @class {CampaignsResource}
+ * @class CampaignsResource
  * @extends {CSCoreSDK.Resource}
  * @implements {CSCoreSDK.HasInstanceResource<CompanyResource>}
  * @implements {CSCoreSDK.ListEnabled<Company>}
@@ -40,7 +40,7 @@ export class CompaniesResource extends CSCoreSDK.Resource
 }
 
 /**
- * @class {CompanyResource}
+ * @class CompanyResource
  * @extends {CSCoreSDK.InstanceResource}
  * @implements {CSCoreSDK.GetEnabled<Company>}
  */

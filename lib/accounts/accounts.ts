@@ -4,7 +4,7 @@ import { BalanceResource } from './balance';
 import { TransactionsResource } from './transactions';
 
 /**
- * @class {AccountsResource}
+ * @class AccountsResource
  * @extends {CSCoreSDK.Resource}
  * @implements {CSCoreSDK.PaginatedListEnabled<Account>}
  */
@@ -39,7 +39,7 @@ export class AccountsResource extends CSCoreSDK.Resource
 }
 
 /**
- * @class {AccountResource}
+ * @class AccountResource
  * @extends {CSCoreSDK.InstanceResource}
  */
 export class AccountResource extends CSCoreSDK.InstanceResource {
