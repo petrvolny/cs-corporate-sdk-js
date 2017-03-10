@@ -1,5 +1,8 @@
 /// <reference types="es6-promise" />
 declare module 'cs-corporate-sdk/common' {
+	/**
+	 * @interface AccountNumber
+	 */
 	export interface AccountNumber {
 	    /**
 	     * IBAN
@@ -30,6 +33,9 @@ declare module 'cs-corporate-sdk/common' {
 	     */
 	    accountPartyDescription?: string;
 	}
+	/**
+	 * @interface Amount
+	 */
 	export interface Amount {
 	    /**
 	     * Current ledger balance
@@ -49,12 +55,21 @@ declare module 'cs-corporate-sdk/common' {
 declare module 'cs-corporate-sdk/accounts/balance' {
 	import * as CSCoreSDK from 'cs-core-sdk';
 	import { Amount } from 'cs-corporate-sdk/common';
+	/**
+	 * @class BalanceResource
+	 * @extends {CSCoreSDK.Resource}
+	 * @implements {CSCoreSDK.GetEnabled<AccountBalance>}
+	 */
 	export class BalanceResource extends CSCoreSDK.Resource implements CSCoreSDK.GetEnabled<AccountBalance> {
 	    /**
 	     * Get balance of the account
+	     * @returns {Promise<AccountBalance>}
 	     */
 	    get: () => Promise<AccountBalance>;
 	}
+	/**
+	 * @interface AccountBalance
+	 */
 	export interface AccountBalance {
 	    /**
 	     * Ledger balance info
@@ -82,12 +97,24 @@ declare module 'cs-corporate-sdk/accounts/balance' {
 declare module 'cs-corporate-sdk/accounts/transactions' {
 	import * as CSCoreSDK from 'cs-core-sdk';
 	import { AccountNumber, Amount } from 'cs-corporate-sdk/common';
+	/**
+	 * @class TransactionsResource
+	 * @extends {CSCoreSDK.Resource}
+	 * @implements {CSCoreSDK.PaginatedListEnabled<Transaction>}
+	 */
 	export class TransactionsResource extends CSCoreSDK.Resource implements CSCoreSDK.PaginatedListEnabled<Transaction> {
 	    /**
 	     * List accounts transactions
+	     * @param {TransactionsParameters} params
+	     * @returns {Promise<TransactionList>}
 	     */
 	    list: (params: TransactionsParameters) => Promise<TransactionList>;
 	}
+	/**
+	 * @interface TransactionsParameters
+	 * @extends {CSCoreSDK.Paginated}
+	 * @extends {CSCoreSDK.Sortable}
+	 */
 	export interface TransactionsParameters extends CSCoreSDK.Paginated, CSCoreSDK.Sortable {
 	    /**
 	     * transactions from
@@ -98,8 +125,15 @@ declare module 'cs-corporate-sdk/accounts/transactions' {
 	     */
 	    dateEnd: Date;
 	}
+	/**
+	 * @interface TransactionList
+	 * @extends {CSCoreSDK.PaginatedListResponse<Transaction>}
+	 */
 	export interface TransactionList extends CSCoreSDK.PaginatedListResponse<Transaction> {
 	}
+	/**
+	 * @interface Transaction
+	 */
 	export interface Transaction {
 	    /**
 	     * transaction reference ID
@@ -177,30 +211,57 @@ declare module 'cs-corporate-sdk/accounts/accounts' {
 	import { AccountNumber } from 'cs-corporate-sdk/common';
 	import { BalanceResource } from 'cs-corporate-sdk/accounts/balance';
 	import { TransactionsResource } from 'cs-corporate-sdk/accounts/transactions';
+	/**
+	 * @class AccountsResource
+	 * @extends {CSCoreSDK.Resource}
+	 * @implements {CSCoreSDK.PaginatedListEnabled<Account>}
+	 */
 	export class AccountsResource extends CSCoreSDK.Resource implements CSCoreSDK.PaginatedListEnabled<Account> {
 	    /**
 	     * List bank accounts incl. basic account information the current user can see accordign to disposition model.
+	     * @param {AccountsParameters=} params
+	     * @returns {Promise<AccountList>}
 	     */
 	    list: (params?: AccountsParameters) => Promise<AccountList>;
 	    /**
 	     * Returns Account resource with a given ID
+	     * @param {number|string} accountId
+	     * @returns {AccountResource}
 	     */
 	    withId: (accountId: string | number) => AccountResource;
 	}
+	/**
+	 * @class AccountResource
+	 * @extends {CSCoreSDK.InstanceResource}
+	 */
 	export class AccountResource extends CSCoreSDK.InstanceResource {
 	    /**
 	     * Returns resource for getting accounts balance
+	     * @returns {BalanceResource}
 	     */
 	    readonly balance: BalanceResource;
 	    /**
 	     * Returns resource for getting accounts transactions
+	     * @returns {TransactionsResource}
 	     */
 	    readonly transactions: TransactionsResource;
 	}
+	/**
+	 * @interface AccountsParameters
+	 * @extends {CSCoreSDK.Sortable}
+	 * @extends {CSCoreSDK.Paginated}
+	 */
 	export interface AccountsParameters extends CSCoreSDK.Sortable, CSCoreSDK.Paginated {
 	}
+	/**
+	 * @interface AccountList
+	 * @extends {CSCoreSDK.PaginatedListResponse<Account>}
+	 */
 	export interface AccountList extends CSCoreSDK.PaginatedListResponse<Account> {
 	}
+	/**
+	 * @interface Account
+	 */
 	export interface Account {
 	    /**
 	     * product instance id used to uniquely reference the particular product instance (IBAN is not always present and account number does not always uniquely identify an account/product instance)
@@ -231,6 +292,9 @@ declare module 'cs-corporate-sdk/accounts/accounts' {
 	    */
 	    balance: BalanceResource;
 	}
+	/**
+	 * @interface AccountOwner
+	 */
 	export interface AccountOwner {
 	    /**
 	     * Company owns the account
@@ -271,14 +335,27 @@ declare module 'cs-corporate-sdk/accounts/accounts' {
 }
 declare module 'cs-corporate-sdk/companies/campaigns' {
 	import * as CSCoreSDK from 'cs-core-sdk';
+	/**
+	 * @class CampaignsResource
+	 * @extends {CSCoreSDK.Resource}
+	 * @implements {CSCoreSDK.ListEnabled<Campaign>}
+	 */
 	export class CampaignsResource extends CSCoreSDK.Resource implements CSCoreSDK.ListEnabled<Campaign> {
 	    /**
 	     * List marketing campaigns
+	     * @returns {Promise<CampaignList>}
 	     */
 	    list: () => Promise<CampaignList>;
 	}
+	/**
+	 * @interface CampaignList
+	 * @extends {CSCoreSDK.ListResponse<Campaign>}
+	 */
 	export interface CampaignList extends CSCoreSDK.ListResponse<Campaign> {
 	}
+	/**
+	 * @interface Campaign
+	 */
 	export interface Campaign {
 	    /**
 	     * Id of a campaign
@@ -309,12 +386,21 @@ declare module 'cs-corporate-sdk/companies/campaigns' {
 }
 declare module 'cs-corporate-sdk/companies/photo/info' {
 	import * as CSCoreSDK from 'cs-core-sdk';
+	/**
+	 * @class RelationshipManagerPhotoInfoResource
+	 * @extends {CSCoreSDK.Resource}
+	 * @implements {CSCoreSDK.GetEnabled<RelationshipManagerPhotoInfo>}
+	 */
 	export class RelationshipManagerPhotoInfoResource extends CSCoreSDK.Resource implements CSCoreSDK.GetEnabled<RelationshipManagerPhotoInfo> {
 	    /**
 	     * Get information about the relationship manager photo
+	     * @returns {Promise<RelationshipManagerPhotoInfo>}
 	     */
 	    get: () => Promise<RelationshipManagerPhotoInfo>;
 	}
+	/**
+	 * @interface RelationshipManagerPhotoInfo
+	 */
 	export interface RelationshipManagerPhotoInfo {
 	    /**
 	     * employee identifier
@@ -342,16 +428,26 @@ declare module 'cs-corporate-sdk/companies/photo/info' {
 declare module 'cs-corporate-sdk/companies/photo/photo' {
 	import * as CSCoreSDK from 'cs-core-sdk';
 	import { RelationshipManagerPhotoInfoResource } from 'cs-corporate-sdk/companies/photo/info';
-	export class RelationshipManagerPhotoResource extends CSCoreSDK.Resource {
+	/**
+	 * @class RelationshipManagerPhotoResource
+	 * @implements {CSCoreSDK.Resource}
+	 */
+	export class RelationshipManagerPhotoResource extends CSCoreSDK.Resource implements CSCoreSDK.ParametrizedDownloadEnabled<RelationshipManagerPhotoDownloadParameters, Uint8Array> {
 	    /**
 	     * Download relations managers photo.
+	     * @param {RelationshipManagerPhotoDownloadParameters} params
+	     * @returns {Promise<Uint8Array>}
 	     */
-	    download: (params: RelationshipManagerPhotoDownloadParameters) => Promise<any>;
+	    download: (params: RelationshipManagerPhotoDownloadParameters) => Promise<Uint8Array>;
 	    /**
 	     * Returns RelationshipManagerPhotoInfoResource for getting infomation about the photo
+	     * @returns {RelationshipManagerPhotoInfoResource}
 	     */
 	    readonly info: RelationshipManagerPhotoInfoResource;
 	}
+	/**
+	 * @interface RelationshipManagerPhotoDownloadParameters
+	 */
 	export interface RelationshipManagerPhotoDownloadParameters {
 	    /**
 	     * type of photo (BW, THUMBNAIL, MINI, STANDARD, LARGE)
@@ -363,35 +459,62 @@ declare module 'cs-corporate-sdk/companies/photo/photo' {
 declare module 'cs-corporate-sdk/companies/relationship-managers' {
 	import * as CSCoreSDK from 'cs-core-sdk';
 	import { RelationshipManagerPhotoResource } from 'cs-corporate-sdk/companies/photo/photo';
+	/**
+	 * @class RelationshipManagersResource
+	 * @extends {CSCoreSDK.Resource}
+	 * @implements {CSCoreSDK.ListEnabled<RelationshipManager>}
+	 * @implements {CSCoreSDK.HasInstanceResource<RelationshipManagerResource>}
+	 */
 	export class RelationshipManagersResource extends CSCoreSDK.Resource implements CSCoreSDK.ListEnabled<RelationshipManager>, CSCoreSDK.HasInstanceResource<RelationshipManagerResource> {
 	    /**
 	     * List all relationship managers grouped by their positions. You will get an array of positions whilst each position may include one or more relationship managers. Typically there should be just one position flagged as primary as well as one contact in each position.
 	     * You can filter for all positions (ALL) or for primary only (PRIMARY).
+	     * @param {RelationshipManagerListParameters=} params
+	     * @returns {Promise<RelationshipManagerList>}
 	     */
 	    list: (params?: RelationshipManagerListParameters) => Promise<RelationshipManagerList>;
 	    /**
 	     * Returns RelationshipManagerResource for a given employee id
+	     * @param {string|number} emplId
+	     * @returns {RelationshipManagerResource}
 	     */
 	    withId: (emplId: string | number) => RelationshipManagerResource;
 	}
+	/**
+	 * @class RelationshipManagerResource
+	 * @extends {CSCoreSDK.InstanceResource}
+	 * @implements {CSCoreSDK.GetEnabled<EmployeeDetail>}
+	 */
 	export class RelationshipManagerResource extends CSCoreSDK.InstanceResource implements CSCoreSDK.GetEnabled<EmployeeDetail> {
 	    /**
 	     * Get a reletionshipt manager detail
+	     * @returns {Promise<EmployeeDetail>}
 	     */
 	    get: () => Promise<EmployeeDetail>;
 	    /**
 	     * Returns RelationshipManagerPhotoResource for getting relationship managers photo
+	     * @returns {RelationshipManagerPhotoResource}
 	     */
 	    readonly photo: RelationshipManagerPhotoResource;
 	}
+	/**
+	 * @interface RelationshipManagerListParameters
+	 */
 	export interface RelationshipManagerListParameters {
 	    /**
 	     * Filter for all positions (ALL) or for primary only (PRIMARY).
 	     */
 	    filter?: string;
 	}
+	/**
+	 * @interface RelationshipManagerList
+	 * @extends {CSCoreSDK.ListResponse<RelationshipManager>}
+	 */
 	export interface RelationshipManagerList extends CSCoreSDK.ListResponse<RelationshipManager> {
 	}
+	/**
+	 * @interface RelationshipManager
+	 */
 	export interface RelationshipManager {
 	    /**
 	     * Position identifier.
@@ -410,6 +533,9 @@ declare module 'cs-corporate-sdk/companies/relationship-managers' {
 	     */
 	    employees: [ListingEmployee];
 	}
+	/**
+	 * @interface Employee
+	 */
 	export interface Employee {
 	    /**
 	     * Employee id, used in API-s like PhoneBook
@@ -429,15 +555,24 @@ declare module 'cs-corporate-sdk/companies/relationship-managers' {
 	    photo: RelationshipManagerPhotoResource;
 	    /**
 	     * Convenience method for getting detail of the relationship manager from the list
+	     * @returns {Promise<Employee>|Promise<RelationshipManager>}
 	     */
 	    get: () => Promise<Employee | RelationshipManager>;
 	}
+	/**
+	 * @interface ListingEmployee
+	 * @extends {Employee}
+	 */
 	export interface ListingEmployee extends Employee {
 	    /**
 	     * Marks a specialist as primary for a client.
 	     */
 	    primaryFlag?: boolean;
 	}
+	/**
+	 * @interface EmployeeDetail
+	 * @extends {Employee}
+	 */
 	export interface EmployeeDetail extends Employee {
 	    /**
 	     * Employee personal number
@@ -639,6 +774,7 @@ declare module 'cs-corporate-sdk/companies/relationship-managers' {
 	    photo: RelationshipManagerPhotoResource;
 	    /**
 	     * Convenience method for getting detail of the relationship manager right from the list
+	     * @returns {Promise<RelationshipManager>}
 	     */
 	    get: () => Promise<RelationshipManager>;
 	}
@@ -648,32 +784,56 @@ declare module 'cs-corporate-sdk/companies/companies' {
 	import * as CSCoreSDK from 'cs-core-sdk';
 	import { CampaignsResource } from 'cs-corporate-sdk/companies/campaigns';
 	import { RelationshipManagersResource } from 'cs-corporate-sdk/companies/relationship-managers';
+	/**
+	 * @class CampaignsResource
+	 * @extends {CSCoreSDK.Resource}
+	 * @implements {CSCoreSDK.HasInstanceResource<CompanyResource>}
+	 * @implements {CSCoreSDK.ListEnabled<Company>}
+	 */
 	export class CompaniesResource extends CSCoreSDK.Resource implements CSCoreSDK.HasInstanceResource<CompanyResource>, CSCoreSDK.ListEnabled<Company> {
 	    /**
 	     * List of companies associated with client including the type of relationship from the current client to the subject.
+	     * @returns {Promise<CompanyList>}
 	     */
 	    list: () => Promise<CompanyList>;
 	    /**
 	     * Get a Company resource for company with a given ico representing registration number
+	     * @param {string|number} ico
+	     * @returns {CompanyResource}
 	     */
 	    withId: (ico: string | number) => CompanyResource;
 	}
+	/**
+	 * @class CompanyResource
+	 * @extends {CSCoreSDK.InstanceResource}
+	 * @implements {CSCoreSDK.GetEnabled<Company>}
+	 */
 	export class CompanyResource extends CSCoreSDK.InstanceResource implements CSCoreSDK.GetEnabled<Company> {
 	    /**
 	     * Get company detail
+	     * @returns {Promise<Company>}
 	     */
 	    get: () => Promise<Company>;
 	    /**
 	     * Returns CampaignsResource for listing company's campaigns
+	     * @returns {CampaignsResource}
 	     */
 	    readonly campaigns: CampaignsResource;
 	    /**
 	     * Returns RelationshipManagersResource for listing company's relationship managers and info about them including photo
+	     * @returns {RelationshipManagersResource}
 	     */
 	    readonly relationshipManagers: RelationshipManagersResource;
 	}
+	/**
+	 * @interface CompanyList
+	 * @extends {CSCoreSDK.ListResponse<Company>}
+	 */
 	export interface CompanyList extends CSCoreSDK.ListResponse<Company> {
 	}
+	/**
+	 * @interface Company
+	 */
 	export interface Company {
 	    /**
 	     * registration number (ICO)
@@ -747,6 +907,7 @@ declare module 'cs-corporate-sdk/companies/companies' {
 	    relationshipManagers: RelationshipManagersResource;
 	    /**
 	     * Convenience method for getting detail of the company right from the list
+	     * @returns {Promise<Company>}
 	     */
 	    get: () => Promise<Company>;
 	}
@@ -756,24 +917,31 @@ declare module 'cs-corporate-sdk/corporate' {
 	import * as CSCoreSDK from 'cs-core-sdk';
 	import { AccountsResource } from 'cs-corporate-sdk/accounts/accounts';
 	import { CompaniesResource } from 'cs-corporate-sdk/companies/companies';
+	/**
+	 * Returns the singleton CorporateClient
+	 * @returns {CorporateClient}
+	 */
 	export function getClient(): CorporateClient;
 	/**
 	 * Corporate client
+	 * @class CorporateClient
+	 * @extends {CSCoreSDK.WebApiClient}
 	 */
 	export class CorporateClient extends CSCoreSDK.WebApiClient {
 	    /**
 	     * Creates new instance of CorporateClient
-	     *
-	     * @param config WebApiConfiguration object that configures this client
-	     * @param context WebApiContext object that allows for data sharing between clients
+	     * @param {CSCoreSDK.WebApiConfiguration} config WebApiConfiguration object that configures this client
+	     * @param {CSCoreSDK.WebApiContext} context WebApiContext object that allows for data sharing between clients
 	     */
 	    constructor(config: CSCoreSDK.WebApiConfiguration, context: CSCoreSDK.WebApiContext);
 	    /**
 	     * Get information about company accounts including balance and transactions
+	     * @returns {AccountsResource}
 	     */
 	    readonly accounts: AccountsResource;
 	    /**
 	     * Get information about companies including theit campaings and relationship managers
+	     * @returns {CompaniesResource}
 	     */
 	    readonly companies: CompaniesResource;
 	}

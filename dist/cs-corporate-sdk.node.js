@@ -1,4 +1,3 @@
-require("source-map-support").install();
 module.exports =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -48,17 +47,24 @@ module.exports =
 
 	/// <reference types="es6-promise" />
 	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
+	var __extends = (this && this.__extends) || (function () {
+	    var extendStatics = Object.setPrototypeOf ||
+	        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+	        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+	    return function (d, b) {
+	        extendStatics(d, b);
+	        function __() { this.constructor = d; }
+	        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	    };
+	})();
+	Object.defineProperty(exports, "__esModule", { value: true });
 	var CSCoreSDK = __webpack_require__(1);
 	var accounts_1 = __webpack_require__(2);
 	var companies_1 = __webpack_require__(5);
 	var sharedClient = null;
-	/*+
+	/**
 	 * Returns the singleton CorporateClient
+	 * @returns {CorporateClient}
 	 */
 	function getClient() {
 	    if (sharedClient === null) {
@@ -69,14 +75,15 @@ module.exports =
 	exports.getClient = getClient;
 	/**
 	 * Corporate client
+	 * @class CorporateClient
+	 * @extends {CSCoreSDK.WebApiClient}
 	 */
 	var CorporateClient = (function (_super) {
 	    __extends(CorporateClient, _super);
 	    /**
 	     * Creates new instance of CorporateClient
-	     *
-	     * @param config WebApiConfiguration object that configures this client
-	     * @param context WebApiContext object that allows for data sharing between clients
+	     * @param {CSCoreSDK.WebApiConfiguration} config WebApiConfiguration object that configures this client
+	     * @param {CSCoreSDK.WebApiContext} context WebApiContext object that allows for data sharing between clients
 	     */
 	    function CorporateClient(config, context) {
 	        var _this = _super.call(this, config, '/api/v1/corporate/our') || this;
@@ -86,6 +93,7 @@ module.exports =
 	    Object.defineProperty(CorporateClient.prototype, "accounts", {
 	        /**
 	         * Get information about company accounts including balance and transactions
+	         * @returns {AccountsResource}
 	         */
 	        get: function () {
 	            return new accounts_1.AccountsResource(this.getPath() + "/accounts", this);
@@ -96,6 +104,7 @@ module.exports =
 	    Object.defineProperty(CorporateClient.prototype, "companies", {
 	        /**
 	         * Get information about companies including theit campaings and relationship managers
+	         * @returns {CompaniesResource}
 	         */
 	        get: function () {
 	            return new companies_1.CompaniesResource(this.getPath() + "/companies", this);
@@ -119,20 +128,33 @@ module.exports =
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
+	var __extends = (this && this.__extends) || (function () {
+	    var extendStatics = Object.setPrototypeOf ||
+	        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+	        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+	    return function (d, b) {
+	        extendStatics(d, b);
+	        function __() { this.constructor = d; }
+	        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	    };
+	})();
+	Object.defineProperty(exports, "__esModule", { value: true });
 	var CSCoreSDK = __webpack_require__(1);
 	var balance_1 = __webpack_require__(3);
 	var transactions_1 = __webpack_require__(4);
+	/**
+	 * @class AccountsResource
+	 * @extends {CSCoreSDK.Resource}
+	 * @implements {CSCoreSDK.PaginatedListEnabled<Account>}
+	 */
 	var AccountsResource = (function (_super) {
 	    __extends(AccountsResource, _super);
 	    function AccountsResource() {
 	        var _this = _super !== null && _super.apply(this, arguments) || this;
 	        /**
 	         * List bank accounts incl. basic account information the current user can see accordign to disposition model.
+	         * @param {AccountsParameters=} params
+	         * @returns {Promise<AccountList>}
 	         */
 	        _this.list = function (params) {
 	            return CSCoreSDK.ResourceUtils.CallPaginatedListWithSuffix(_this, null, 'accounts', params, function (response) {
@@ -145,6 +167,8 @@ module.exports =
 	        };
 	        /**
 	         * Returns Account resource with a given ID
+	         * @param {number|string} accountId
+	         * @returns {AccountResource}
 	         */
 	        _this.withId = function (accountId) {
 	            return new AccountResource(accountId, _this.getPath(), _this.getClient());
@@ -154,6 +178,10 @@ module.exports =
 	    return AccountsResource;
 	}(CSCoreSDK.Resource));
 	exports.AccountsResource = AccountsResource;
+	/**
+	 * @class AccountResource
+	 * @extends {CSCoreSDK.InstanceResource}
+	 */
 	var AccountResource = (function (_super) {
 	    __extends(AccountResource, _super);
 	    function AccountResource() {
@@ -162,6 +190,7 @@ module.exports =
 	    Object.defineProperty(AccountResource.prototype, "balance", {
 	        /**
 	         * Returns resource for getting accounts balance
+	         * @returns {BalanceResource}
 	         */
 	        get: function () {
 	            return new balance_1.BalanceResource(this.getPath() + "/balance", this.getClient());
@@ -172,6 +201,7 @@ module.exports =
 	    Object.defineProperty(AccountResource.prototype, "transactions", {
 	        /**
 	         * Returns resource for getting accounts transactions
+	         * @returns {TransactionsResource}
 	         */
 	        get: function () {
 	            return new transactions_1.TransactionsResource(this.getPath() + "/transactions", this.getClient());
@@ -193,18 +223,30 @@ module.exports =
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
+	var __extends = (this && this.__extends) || (function () {
+	    var extendStatics = Object.setPrototypeOf ||
+	        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+	        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+	    return function (d, b) {
+	        extendStatics(d, b);
+	        function __() { this.constructor = d; }
+	        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	    };
+	})();
+	Object.defineProperty(exports, "__esModule", { value: true });
 	var CSCoreSDK = __webpack_require__(1);
+	/**
+	 * @class BalanceResource
+	 * @extends {CSCoreSDK.Resource}
+	 * @implements {CSCoreSDK.GetEnabled<AccountBalance>}
+	 */
 	var BalanceResource = (function (_super) {
 	    __extends(BalanceResource, _super);
 	    function BalanceResource() {
 	        var _this = _super !== null && _super.apply(this, arguments) || this;
 	        /**
 	         * Get balance of the account
+	         * @returns {Promise<AccountBalance>}
 	         */
 	        _this.get = function () {
 	            return CSCoreSDK.ResourceUtils.CallGet(_this, null).then(function (response) {
@@ -225,18 +267,31 @@ module.exports =
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
+	var __extends = (this && this.__extends) || (function () {
+	    var extendStatics = Object.setPrototypeOf ||
+	        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+	        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+	    return function (d, b) {
+	        extendStatics(d, b);
+	        function __() { this.constructor = d; }
+	        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	    };
+	})();
+	Object.defineProperty(exports, "__esModule", { value: true });
 	var CSCoreSDK = __webpack_require__(1);
+	/**
+	 * @class TransactionsResource
+	 * @extends {CSCoreSDK.Resource}
+	 * @implements {CSCoreSDK.PaginatedListEnabled<Transaction>}
+	 */
 	var TransactionsResource = (function (_super) {
 	    __extends(TransactionsResource, _super);
 	    function TransactionsResource() {
 	        var _this = _super !== null && _super.apply(this, arguments) || this;
 	        /**
 	         * List accounts transactions
+	         * @param {TransactionsParameters} params
+	         * @returns {Promise<TransactionList>}
 	         */
 	        _this.list = function (params) {
 	            // transform date objects to ISO strings
@@ -261,20 +316,33 @@ module.exports =
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
+	var __extends = (this && this.__extends) || (function () {
+	    var extendStatics = Object.setPrototypeOf ||
+	        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+	        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+	    return function (d, b) {
+	        extendStatics(d, b);
+	        function __() { this.constructor = d; }
+	        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	    };
+	})();
+	Object.defineProperty(exports, "__esModule", { value: true });
 	var CSCoreSDK = __webpack_require__(1);
 	var campaigns_1 = __webpack_require__(6);
 	var relationship_managers_1 = __webpack_require__(7);
+	/**
+	 * @class CampaignsResource
+	 * @extends {CSCoreSDK.Resource}
+	 * @implements {CSCoreSDK.HasInstanceResource<CompanyResource>}
+	 * @implements {CSCoreSDK.ListEnabled<Company>}
+	 */
 	var CompaniesResource = (function (_super) {
 	    __extends(CompaniesResource, _super);
 	    function CompaniesResource() {
 	        var _this = _super !== null && _super.apply(this, arguments) || this;
 	        /**
 	         * List of companies associated with client including the type of relationship from the current client to the subject.
+	         * @returns {Promise<CompanyList>}
 	         */
 	        _this.list = function () {
 	            return CSCoreSDK.ResourceUtils.CallListWithSuffix(_this, null).then(function (response) {
@@ -287,6 +355,8 @@ module.exports =
 	        };
 	        /**
 	         * Get a Company resource for company with a given ico representing registration number
+	         * @param {string|number} ico
+	         * @returns {CompanyResource}
 	         */
 	        _this.withId = function (ico) {
 	            return new CompanyResource(ico, _this.getPath(), _this.getClient());
@@ -296,12 +366,18 @@ module.exports =
 	    return CompaniesResource;
 	}(CSCoreSDK.Resource));
 	exports.CompaniesResource = CompaniesResource;
+	/**
+	 * @class CompanyResource
+	 * @extends {CSCoreSDK.InstanceResource}
+	 * @implements {CSCoreSDK.GetEnabled<Company>}
+	 */
 	var CompanyResource = (function (_super) {
 	    __extends(CompanyResource, _super);
 	    function CompanyResource() {
 	        var _this = _super !== null && _super.apply(this, arguments) || this;
 	        /**
 	         * Get company detail
+	         * @returns {Promise<Company>}
 	         */
 	        _this.get = function () {
 	            return CSCoreSDK.ResourceUtils.CallGet(_this, null).then(function (response) {
@@ -315,6 +391,7 @@ module.exports =
 	    Object.defineProperty(CompanyResource.prototype, "campaigns", {
 	        /**
 	         * Returns CampaignsResource for listing company's campaigns
+	         * @returns {CampaignsResource}
 	         */
 	        get: function () {
 	            return new campaigns_1.CampaignsResource(this.getPath() + "/campaigns", this.getClient());
@@ -325,6 +402,7 @@ module.exports =
 	    Object.defineProperty(CompanyResource.prototype, "relationshipManagers", {
 	        /**
 	         * Returns RelationshipManagersResource for listing company's relationship managers and info about them including photo
+	         * @returns {RelationshipManagersResource}
 	         */
 	        get: function () {
 	            return new relationship_managers_1.RelationshipManagersResource(this.getPath() + "/relationshipmanagers", this.getClient());
@@ -349,18 +427,30 @@ module.exports =
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
+	var __extends = (this && this.__extends) || (function () {
+	    var extendStatics = Object.setPrototypeOf ||
+	        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+	        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+	    return function (d, b) {
+	        extendStatics(d, b);
+	        function __() { this.constructor = d; }
+	        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	    };
+	})();
+	Object.defineProperty(exports, "__esModule", { value: true });
 	var CSCoreSDK = __webpack_require__(1);
+	/**
+	 * @class CampaignsResource
+	 * @extends {CSCoreSDK.Resource}
+	 * @implements {CSCoreSDK.ListEnabled<Campaign>}
+	 */
 	var CampaignsResource = (function (_super) {
 	    __extends(CampaignsResource, _super);
 	    function CampaignsResource() {
 	        var _this = _super !== null && _super.apply(this, arguments) || this;
 	        /**
 	         * List marketing campaigns
+	         * @returns {Promise<CampaignList>}
 	         */
 	        _this.list = function () {
 	            return CSCoreSDK.ResourceUtils.CallListWithSuffix(_this, null).then(function (response) {
@@ -381,13 +471,25 @@ module.exports =
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
+	var __extends = (this && this.__extends) || (function () {
+	    var extendStatics = Object.setPrototypeOf ||
+	        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+	        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+	    return function (d, b) {
+	        extendStatics(d, b);
+	        function __() { this.constructor = d; }
+	        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	    };
+	})();
+	Object.defineProperty(exports, "__esModule", { value: true });
 	var CSCoreSDK = __webpack_require__(1);
 	var photo_1 = __webpack_require__(8);
+	/**
+	 * @class RelationshipManagersResource
+	 * @extends {CSCoreSDK.Resource}
+	 * @implements {CSCoreSDK.ListEnabled<RelationshipManager>}
+	 * @implements {CSCoreSDK.HasInstanceResource<RelationshipManagerResource>}
+	 */
 	var RelationshipManagersResource = (function (_super) {
 	    __extends(RelationshipManagersResource, _super);
 	    function RelationshipManagersResource() {
@@ -395,6 +497,8 @@ module.exports =
 	        /**
 	         * List all relationship managers grouped by their positions. You will get an array of positions whilst each position may include one or more relationship managers. Typically there should be just one position flagged as primary as well as one contact in each position.
 	         * You can filter for all positions (ALL) or for primary only (PRIMARY).
+	         * @param {RelationshipManagerListParameters=} params
+	         * @returns {Promise<RelationshipManagerList>}
 	         */
 	        _this.list = function (params) {
 	            return CSCoreSDK.ResourceUtils.CallListWithSuffix(_this, null, null, params).then(function (response) {
@@ -411,6 +515,8 @@ module.exports =
 	        };
 	        /**
 	         * Returns RelationshipManagerResource for a given employee id
+	         * @param {string|number} emplId
+	         * @returns {RelationshipManagerResource}
 	         */
 	        _this.withId = function (emplId) {
 	            return new RelationshipManagerResource(emplId, _this.getPath(), _this.getClient());
@@ -420,12 +526,18 @@ module.exports =
 	    return RelationshipManagersResource;
 	}(CSCoreSDK.Resource));
 	exports.RelationshipManagersResource = RelationshipManagersResource;
+	/**
+	 * @class RelationshipManagerResource
+	 * @extends {CSCoreSDK.InstanceResource}
+	 * @implements {CSCoreSDK.GetEnabled<EmployeeDetail>}
+	 */
 	var RelationshipManagerResource = (function (_super) {
 	    __extends(RelationshipManagerResource, _super);
 	    function RelationshipManagerResource() {
 	        var _this = _super !== null && _super.apply(this, arguments) || this;
 	        /**
 	         * Get a reletionshipt manager detail
+	         * @returns {Promise<EmployeeDetail>}
 	         */
 	        _this.get = function () {
 	            return CSCoreSDK.ResourceUtils.CallGet(_this, null).then(function (response) {
@@ -439,6 +551,7 @@ module.exports =
 	    Object.defineProperty(RelationshipManagerResource.prototype, "photo", {
 	        /**
 	         * Returns RelationshipManagerPhotoResource for getting relationship managers photo
+	         * @returns {RelationshipManagerPhotoResource}
 	         */
 	        get: function () {
 	            return new photo_1.RelationshipManagerPhotoResource(this.getPath() + "/photo", this.getClient());
@@ -463,19 +576,31 @@ module.exports =
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
+	var __extends = (this && this.__extends) || (function () {
+	    var extendStatics = Object.setPrototypeOf ||
+	        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+	        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+	    return function (d, b) {
+	        extendStatics(d, b);
+	        function __() { this.constructor = d; }
+	        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	    };
+	})();
+	Object.defineProperty(exports, "__esModule", { value: true });
 	var CSCoreSDK = __webpack_require__(1);
 	var info_1 = __webpack_require__(9);
+	/**
+	 * @class RelationshipManagerPhotoResource
+	 * @implements {CSCoreSDK.Resource}
+	 */
 	var RelationshipManagerPhotoResource = (function (_super) {
 	    __extends(RelationshipManagerPhotoResource, _super);
 	    function RelationshipManagerPhotoResource() {
 	        var _this = _super !== null && _super.apply(this, arguments) || this;
 	        /**
 	         * Download relations managers photo.
+	         * @param {RelationshipManagerPhotoDownloadParameters} params
+	         * @returns {Promise<Uint8Array>}
 	         */
 	        _this.download = function (params) {
 	            return CSCoreSDK.ResourceUtils.CallDownload(_this, null, 'GET', params);
@@ -485,6 +610,7 @@ module.exports =
 	    Object.defineProperty(RelationshipManagerPhotoResource.prototype, "info", {
 	        /**
 	         * Returns RelationshipManagerPhotoInfoResource for getting infomation about the photo
+	         * @returns {RelationshipManagerPhotoInfoResource}
 	         */
 	        get: function () {
 	            return new info_1.RelationshipManagerPhotoInfoResource(this.getPath() + "/info", this.getClient());
@@ -502,18 +628,30 @@ module.exports =
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
+	var __extends = (this && this.__extends) || (function () {
+	    var extendStatics = Object.setPrototypeOf ||
+	        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+	        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+	    return function (d, b) {
+	        extendStatics(d, b);
+	        function __() { this.constructor = d; }
+	        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	    };
+	})();
+	Object.defineProperty(exports, "__esModule", { value: true });
 	var CSCoreSDK = __webpack_require__(1);
+	/**
+	 * @class RelationshipManagerPhotoInfoResource
+	 * @extends {CSCoreSDK.Resource}
+	 * @implements {CSCoreSDK.GetEnabled<RelationshipManagerPhotoInfo>}
+	 */
 	var RelationshipManagerPhotoInfoResource = (function (_super) {
 	    __extends(RelationshipManagerPhotoInfoResource, _super);
 	    function RelationshipManagerPhotoInfoResource() {
 	        var _this = _super !== null && _super.apply(this, arguments) || this;
 	        /**
 	         * Get information about the relationship manager photo
+	         * @returns {Promise<RelationshipManagerPhotoInfo>}
 	         */
 	        _this.get = function () {
 	            return CSCoreSDK.ResourceUtils.CallGet(_this, null).then(function (response) {
@@ -531,4 +669,3 @@ module.exports =
 
 /***/ }
 /******/ ]);
-//# sourceMappingURL=cs-corporate-sdk.node.js.map

@@ -1,6 +1,6 @@
 {
   "name": "cs-corporate-sdk",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "CS Corporate SDK for the CSAS Web Api",
   "main": "dist/cs-corporate-sdk.node.js",
   "types": "dist/cs-corporate-sdk.node.d.ts",
