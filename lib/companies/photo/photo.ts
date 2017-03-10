@@ -5,14 +5,15 @@ import { RelationshipManagerPhotoInfoResource } from './info';
  * @class RelationshipManagerPhotoResource
  * @implements {CSCoreSDK.Resource}
  */
-export class RelationshipManagerPhotoResource extends CSCoreSDK.Resource {
+export class RelationshipManagerPhotoResource extends CSCoreSDK.Resource
+  implements CSCoreSDK.ParametrizedDownloadEnabled<RelationshipManagerPhotoDownloadParameters, Uint8Array> {
 
   /**
    * Download relations managers photo. 
    * @param {RelationshipManagerPhotoDownloadParameters} params
-   * @returns {Promise<any>}
+   * @returns {Promise<Uint8Array>}
    */
-  download = (params: RelationshipManagerPhotoDownloadParameters): Promise<any> => {
+  download = (params: RelationshipManagerPhotoDownloadParameters): Promise<Uint8Array> => {
 
     return CSCoreSDK.ResourceUtils.CallDownload(this, null, 'GET', params);
   }
