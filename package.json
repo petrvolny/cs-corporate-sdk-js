@@ -58,6 +58,7 @@
     "lodash": "^4.17.4",
     "node-uuid": "^1.4.3",
     "source-map-support": "^0.3.3",
-    "standard-error": "^1.1.0"
+    "standard-error": "^1.1.0",
+    "unminified-webpack-plugin": "^1.2.0"
   }
 }
