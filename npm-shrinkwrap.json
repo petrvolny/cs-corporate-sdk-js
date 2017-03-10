@@ -525,9 +525,9 @@
       "dev": true
     },
     "cs-core-sdk": {
-      "version": "0.8.0",
-      "from": "git+https://github.com/Ceskasporitelna/cs-core-sdk-js.git#v0.8.0",
-      "resolved": "git+https://github.com/Ceskasporitelna/cs-core-sdk-js.git#aa94e484b9c397eae9ac25595d823e4b1efa6d12",
+      "version": "0.8.1",
+      "from": "git+https://github.com/Ceskasporitelna/cs-core-sdk-js.git#v0.8.1",
+      "resolved": "git+https://github.com/Ceskasporitelna/cs-core-sdk-js.git#3e631df972f940d21558fb45a8529cdb5beeffc1",
       "dependencies": {
         "@types/crypto-js": {
           "version": "3.1.33",
