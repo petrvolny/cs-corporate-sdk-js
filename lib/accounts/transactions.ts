@@ -33,11 +33,18 @@ export class TransactionsResource extends CSCoreSDK.Resource
 }
 
 /**
+ * @enum TransactionsSortableFields
+ */
+export enum TransactionsSortableFields {
+  ID = 'id',
+}
+
+/**
  * @interface TransactionsParameters
  * @extends {CSCoreSDK.Paginated}
  * @extends {CSCoreSDK.Sortable}
  */
-export interface TransactionsParameters extends CSCoreSDK.Paginated, CSCoreSDK.Sortable {
+export interface TransactionsParameters extends CSCoreSDK.Paginated, CSCoreSDK.Sortable<TransactionsSortableFields> {
 
   /**
    * transactions from 

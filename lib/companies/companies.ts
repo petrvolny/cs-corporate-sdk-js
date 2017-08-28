@@ -17,7 +17,7 @@ export class CompaniesResource extends CSCoreSDK.Resource
    */
   list = (): Promise<CompanyList> => {
 
-    return CSCoreSDK.ResourceUtils.CallListWithSuffix(this, null).then(response => {
+    return CSCoreSDK.ResourceUtils.CallListWithSuffix(this, null).then((response: CompanyList) => {
 
       // Add convenience methods to listing items
       response.items.forEach(item => {
@@ -53,7 +53,7 @@ export class CompanyResource extends CSCoreSDK.InstanceResource
    */
   get = (): Promise<Company> => {
 
-    return CSCoreSDK.ResourceUtils.CallGet(this, null).then(response => {
+    return CSCoreSDK.ResourceUtils.CallGet(this, null).then((response: Company) => {
 
       // Add convenience methods to response
       resourcifyListing(<Company>response, this, false);

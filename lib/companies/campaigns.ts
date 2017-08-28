@@ -14,7 +14,7 @@ export class CampaignsResource extends CSCoreSDK.Resource
    */
   list = (): Promise<CampaignList> => {
 
-    return CSCoreSDK.ResourceUtils.CallListWithSuffix(this, null).then(response => {
+    return CSCoreSDK.ResourceUtils.CallListWithSuffix(this, null).then((response: CampaignList) => {
 
       // transform ISO strings to date objects
       CSCoreSDK.EntityUtils.addDatesToItems('endDate', response);

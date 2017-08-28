@@ -1,7 +1,4 @@
 /// <reference path="../node_modules/cs-core-sdk/dist/cs-core-sdk.sfx.d.ts"/>
-/// <reference path="../build/cs-corporate-sdk.sfx.d.ts"/>
-/// <reference types="jasmine" />
-/// <reference types="node" />
 
 import * as CSCoreSDK from 'cs-core-sdk';
 const corporate = require('../build/cs-corporate-sdk.node.js');
@@ -145,7 +142,6 @@ describe("Corporate SDK", function () {
       expect(response.items.length).toBe(5);
 
       const item = response.items[0];
-      expect(item.regNum).toBe('44366281');
       expect(item.legalForm).toBe('101');
       expect(item.legalFormI18N).toBe('Pod.FO tuz.nezaps.OR');
       expect(item.name).toBe('Kateřina Vávrová');

@@ -1,6 +1,5 @@
 /// <reference path="../node_modules/cs-core-sdk/dist/cs-core-sdk.sfx.d.ts"/>
-/// <reference types="jasmine" />
-/// <reference types="node" />
+/// <reference path="../build/cs-corporate-sdk.sfx.d.ts"/>
 
 import * as CSCoreSDK from 'cs-core-sdk';
 var corporate = require('../build/cs-corporate-sdk.node.js');
@@ -89,6 +88,7 @@ describe("Corporate SDK", function () {
       return client.accounts.list({
         pageNumber: 0,
         pageSize: 1,
+        
       });
     }).then(response => {
 

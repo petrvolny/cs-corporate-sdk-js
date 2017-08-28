@@ -67,11 +67,18 @@ const resourcifyListing = (account: Account, accountReference: AccountResource) 
 }
 
 /**
+ * @enum AccountsSortableFields
+ */
+export enum AccountsSortableFields {
+  ID = 'id',
+}
+
+/**
  * @interface AccountsParameters
  * @extends {CSCoreSDK.Sortable}
  * @extends {CSCoreSDK.Paginated}
  */
-export interface AccountsParameters extends CSCoreSDK.Sortable, CSCoreSDK.Paginated { }
+export interface AccountsParameters extends CSCoreSDK.Sortable<AccountsSortableFields>, CSCoreSDK.Paginated { }
 
 /**
  * @interface AccountList

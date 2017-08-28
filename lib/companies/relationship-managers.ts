@@ -18,7 +18,7 @@ export class RelationshipManagersResource extends CSCoreSDK.Resource
    */
   list = (params?: RelationshipManagerListParameters): Promise<RelationshipManagerList> => {
 
-    return CSCoreSDK.ResourceUtils.CallListWithSuffix(this, null, null, params).then(response => {
+    return CSCoreSDK.ResourceUtils.CallListWithSuffix(this, null, null, params).then((response: RelationshipManagerList) => {
 
       // Add convenience methods to listing items
       response.items.forEach(item => {
@@ -59,7 +59,7 @@ export class RelationshipManagerResource extends CSCoreSDK.InstanceResource
    */
   get = (): Promise<EmployeeDetail> => {
 
-    return CSCoreSDK.ResourceUtils.CallGet(this, null).then(response => {
+    return CSCoreSDK.ResourceUtils.CallGet(this, null).then((response: EmployeeDetail) => {
 
       // Add convenience methods to response
       resourcifyListing(<EmployeeDetail>response, this, false);
