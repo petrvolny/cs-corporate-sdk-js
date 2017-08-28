@@ -128,7 +128,7 @@ Methods that support server side sorting take object with properties `sort` and 
 
 ```javascript
 
-    CSCorporateSDK
+    CSTransparentAccSDK
         .getClient()
         .accounts
         .list({
@@ -147,7 +147,7 @@ You can use multiple values for sorting.
 
 ```javascript
 
-    CSCorporateSDK
+    CSTransparentAccSDK
         .getClient()
         .accounts
         .list({
