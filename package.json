@@ -1,7 +1,7 @@
 {
   "name": "cs-corporate-sdk",
   "version": "0.1.0",
-  "description": "CS Corporate SDK for the CSAS Web Api",
+  "description": "CS Corporate SDK for the WebApi Corporate Accounts",
   "main": "dist/cs-corporate-sdk.node.js",
   "types": "dist/cs-corporate-sdk.node.d.ts",
   "scripts": {
@@ -21,12 +21,23 @@
     "type": "git",
     "url": "https://github.com/Ceskasporitelna/cs-corporate-js.git"
   },
-  "author": "Petr Bažout <petr.bazout@applifting.cz>",
+  "contributors": [
+    {
+      "name": "CSAS Developers",
+      "email" : "developers@csas.cz",
+      "url": "https://developers.csas.cz"
+    },
+    {
+      "name": "Petr Bažout",
+      "email" : "petr.bazout@applifting.cz",
+      "url": "https://www.applifting.cz"
+    }
+ ],
   "license": "SEE LICENSE IN LICENSE.md",
   "bugs": {
     "url": "https://github.com/Ceskasporitelna/cs-corporate-js/issues"
   },
-  "homepage": "https://github.com/Ceskasporitelna/cs-corporate-js#readme",
+  "homepage": "https://developers.csas.cz",
   "devDependencies": {
     "@slack/client": "^3.8.1",
     "cs-core-sdk": "1.2.0",
