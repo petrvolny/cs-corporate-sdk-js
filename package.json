@@ -24,15 +24,15 @@
   "contributors": [
     {
       "name": "CSAS Developers",
-      "email" : "developers@csas.cz",
+      "email": "developers@csas.cz",
       "url": "https://developers.csas.cz"
     },
     {
       "name": "Petr Bažout",
-      "email" : "petr.bazout@applifting.cz",
+      "email": "petr.bazout@applifting.cz",
       "url": "https://www.applifting.cz"
     }
- ],
+  ],
   "license": "SEE LICENSE IN LICENSE.md",
   "bugs": {
     "url": "https://github.com/Ceskasporitelna/cs-corporate-js/issues"
@@ -40,7 +40,7 @@
   "homepage": "https://developers.csas.cz",
   "devDependencies": {
     "@slack/client": "^3.8.1",
-    "cs-core-sdk": "1.2.0",
+    "cs-core-sdk": "^1.2.2",
     "dts-generator": "https://github.com/Applifting/dts-generator.git#compiled-with-types-option",
     "jasmine": "^2.4.1",
     "jasmine-ajax": "^3.2.0",
