@@ -8,6 +8,7 @@ before_install:
   - "yarn install"
   - wget http://chromedriver.storage.googleapis.com/2.21/chromedriver_linux64.zip
   - unzip chromedriver_linux64.zip
+  - rm chromedriver_linux64.zip
   - sudo chmod u+x chromedriver
   - sudo mv chromedriver /usr/bin/
   - "export DISPLAY=:99.0"
