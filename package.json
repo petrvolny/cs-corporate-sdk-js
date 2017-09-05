@@ -1,6 +1,6 @@
 {
   "name": "cs-corporate-sdk",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "CS Corporate SDK for the WebApi Corporate Accounts",
   "main": "dist/cs-corporate-sdk.node.js",
   "types": "dist/cs-corporate-sdk.node.d.ts",

@@ -43,10 +43,10 @@ module.exports =
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
-	/// <reference types="es6-promise" />
 	"use strict";
+	/// <reference types="es6-promise" />
 	var __extends = (this && this.__extends) || (function () {
 	    var extendStatics = Object.setPrototypeOf ||
 	        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -78,7 +78,7 @@ module.exports =
 	 * @class CorporateClient
 	 * @extends {CSCoreSDK.WebApiClient}
 	 */
-	var CorporateClient = (function (_super) {
+	var CorporateClient = /** @class */ (function (_super) {
 	    __extends(CorporateClient, _super);
 	    /**
 	     * Creates new instance of CorporateClient
@@ -117,15 +117,15 @@ module.exports =
 	exports.CorporateClient = CorporateClient;
 
 
-/***/ },
+/***/ }),
 /* 1 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = require("cs-core-sdk");
 
-/***/ },
+/***/ }),
 /* 2 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var __extends = (this && this.__extends) || (function () {
@@ -147,7 +147,7 @@ module.exports =
 	 * @extends {CSCoreSDK.Resource}
 	 * @implements {CSCoreSDK.PaginatedListEnabled<Account>}
 	 */
-	var AccountsResource = (function (_super) {
+	var AccountsResource = /** @class */ (function (_super) {
 	    __extends(AccountsResource, _super);
 	    function AccountsResource() {
 	        var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -182,7 +182,7 @@ module.exports =
 	 * @class AccountResource
 	 * @extends {CSCoreSDK.InstanceResource}
 	 */
-	var AccountResource = (function (_super) {
+	var AccountResource = /** @class */ (function (_super) {
 	    __extends(AccountResource, _super);
 	    function AccountResource() {
 	        return _super !== null && _super.apply(this, arguments) || this;
@@ -216,11 +216,18 @@ module.exports =
 	    account.transactions = accountReference.transactions;
 	    account.balance = accountReference.balance;
 	};
+	/**
+	 * @enum AccountsSortableFields
+	 */
+	var AccountsSortableFields;
+	(function (AccountsSortableFields) {
+	    AccountsSortableFields["ID"] = "id";
+	})(AccountsSortableFields = exports.AccountsSortableFields || (exports.AccountsSortableFields = {}));
 
 
-/***/ },
+/***/ }),
 /* 3 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var __extends = (this && this.__extends) || (function () {
@@ -240,7 +247,7 @@ module.exports =
 	 * @extends {CSCoreSDK.Resource}
 	 * @implements {CSCoreSDK.GetEnabled<AccountBalance>}
 	 */
-	var BalanceResource = (function (_super) {
+	var BalanceResource = /** @class */ (function (_super) {
 	    __extends(BalanceResource, _super);
 	    function BalanceResource() {
 	        var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -262,9 +269,9 @@ module.exports =
 	exports.BalanceResource = BalanceResource;
 
 
-/***/ },
+/***/ }),
 /* 4 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var __extends = (this && this.__extends) || (function () {
@@ -284,7 +291,7 @@ module.exports =
 	 * @extends {CSCoreSDK.Resource}
 	 * @implements {CSCoreSDK.PaginatedListEnabled<Transaction>}
 	 */
-	var TransactionsResource = (function (_super) {
+	var TransactionsResource = /** @class */ (function (_super) {
 	    __extends(TransactionsResource, _super);
 	    function TransactionsResource() {
 	        var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -309,11 +316,18 @@ module.exports =
 	    return TransactionsResource;
 	}(CSCoreSDK.Resource));
 	exports.TransactionsResource = TransactionsResource;
+	/**
+	 * @enum TransactionsSortableFields
+	 */
+	var TransactionsSortableFields;
+	(function (TransactionsSortableFields) {
+	    TransactionsSortableFields["ID"] = "id";
+	})(TransactionsSortableFields = exports.TransactionsSortableFields || (exports.TransactionsSortableFields = {}));
 
 
-/***/ },
+/***/ }),
 /* 5 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var __extends = (this && this.__extends) || (function () {
@@ -336,7 +350,7 @@ module.exports =
 	 * @implements {CSCoreSDK.HasInstanceResource<CompanyResource>}
 	 * @implements {CSCoreSDK.ListEnabled<Company>}
 	 */
-	var CompaniesResource = (function (_super) {
+	var CompaniesResource = /** @class */ (function (_super) {
 	    __extends(CompaniesResource, _super);
 	    function CompaniesResource() {
 	        var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -371,7 +385,7 @@ module.exports =
 	 * @extends {CSCoreSDK.InstanceResource}
 	 * @implements {CSCoreSDK.GetEnabled<Company>}
 	 */
-	var CompanyResource = (function (_super) {
+	var CompanyResource = /** @class */ (function (_super) {
 	    __extends(CompanyResource, _super);
 	    function CompanyResource() {
 	        var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -422,9 +436,9 @@ module.exports =
 	};
 
 
-/***/ },
+/***/ }),
 /* 6 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var __extends = (this && this.__extends) || (function () {
@@ -444,7 +458,7 @@ module.exports =
 	 * @extends {CSCoreSDK.Resource}
 	 * @implements {CSCoreSDK.ListEnabled<Campaign>}
 	 */
-	var CampaignsResource = (function (_super) {
+	var CampaignsResource = /** @class */ (function (_super) {
 	    __extends(CampaignsResource, _super);
 	    function CampaignsResource() {
 	        var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -466,9 +480,9 @@ module.exports =
 	exports.CampaignsResource = CampaignsResource;
 
 
-/***/ },
+/***/ }),
 /* 7 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var __extends = (this && this.__extends) || (function () {
@@ -490,7 +504,7 @@ module.exports =
 	 * @implements {CSCoreSDK.ListEnabled<RelationshipManager>}
 	 * @implements {CSCoreSDK.HasInstanceResource<RelationshipManagerResource>}
 	 */
-	var RelationshipManagersResource = (function (_super) {
+	var RelationshipManagersResource = /** @class */ (function (_super) {
 	    __extends(RelationshipManagersResource, _super);
 	    function RelationshipManagersResource() {
 	        var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -531,7 +545,7 @@ module.exports =
 	 * @extends {CSCoreSDK.InstanceResource}
 	 * @implements {CSCoreSDK.GetEnabled<EmployeeDetail>}
 	 */
-	var RelationshipManagerResource = (function (_super) {
+	var RelationshipManagerResource = /** @class */ (function (_super) {
 	    __extends(RelationshipManagerResource, _super);
 	    function RelationshipManagerResource() {
 	        var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -571,9 +585,9 @@ module.exports =
 	;
 
 
-/***/ },
+/***/ }),
 /* 8 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var __extends = (this && this.__extends) || (function () {
@@ -593,7 +607,7 @@ module.exports =
 	 * @class RelationshipManagerPhotoResource
 	 * @implements {CSCoreSDK.Resource}
 	 */
-	var RelationshipManagerPhotoResource = (function (_super) {
+	var RelationshipManagerPhotoResource = /** @class */ (function (_super) {
 	    __extends(RelationshipManagerPhotoResource, _super);
 	    function RelationshipManagerPhotoResource() {
 	        var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -623,9 +637,9 @@ module.exports =
 	exports.RelationshipManagerPhotoResource = RelationshipManagerPhotoResource;
 
 
-/***/ },
+/***/ }),
 /* 9 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var __extends = (this && this.__extends) || (function () {
@@ -645,7 +659,7 @@ module.exports =
 	 * @extends {CSCoreSDK.Resource}
 	 * @implements {CSCoreSDK.GetEnabled<RelationshipManagerPhotoInfo>}
 	 */
-	var RelationshipManagerPhotoInfoResource = (function (_super) {
+	var RelationshipManagerPhotoInfoResource = /** @class */ (function (_super) {
 	    __extends(RelationshipManagerPhotoInfoResource, _super);
 	    function RelationshipManagerPhotoInfoResource() {
 	        var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -667,5 +681,5 @@ module.exports =
 	exports.RelationshipManagerPhotoInfoResource = RelationshipManagerPhotoInfoResource;
 
 
-/***/ }
+/***/ })
 /******/ ]);

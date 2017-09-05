@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+        
+## [1.0.0] - 2017-09-05
 ### Added
 - Add yarn.lock for locking versions of dependencies
 - Add types to responses in then promise methods
