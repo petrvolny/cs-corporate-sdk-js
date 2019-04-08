@@ -1,7 +1,7 @@
 # CSCorporateSDK
-This SDK allows you to access information about Česká spořitelna a.s. Corporate API [Corporate API](https://developers.erstegroup.com/docs/apis/bank.csas/v1%2Fcorporate).
+This SDK allows you to access information about Česká spořitelna a.s. Corporate API [Corporate API](https://developers.erstegroup.com/docs/apis/bank.csas/bank.csas.v1%2Fcorporate).
 
-Fot current changes in the SDK see [CHANGELOG](CHANGELOG.md)
+For current changes in the SDK see [CHANGELOG](CHANGELOG.md)
 
 # Usage
 
